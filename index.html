@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BroVyapari - Startup Growth Bundle</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Arial", sans-serif;
+      }
+
+      body {
+        color: white;
+        font-family: Arial, sans-serif;
+        background-color: #001f3f;
+        padding-top: 60px; /* For the fixed header */
+        padding-bottom: 80px; /* For the fixed bottom banner */
+        background-image: linear-gradient(
+            rgba(0, 31, 63, 0.95),
+            rgba(0, 31, 63, 0.95)
+          ),
+          url("/api/placeholder/1920/1080");
+        background-size: cover;
+        background-attachment: fixed;
+      }
+
+      /* Sticky Elements */
+      .sticky-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background-color: white;
+        padding: 10px 50px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo-svg {
+        margin-right: 10px;
+      }
+
+      .logo-text {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      .blue-text {
+        color: #1976d2;
+      }
+
+      .bottom-banner {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background-color: #1976d2;
+        padding: 15px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .banner-content {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .banner-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 5px;
+        background-color: white;
+      }
+
+      .banner-text {
+        font-size: 16px;
+        color: white;
+      }
+
+      .banner-price {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        color: white;
+      }
+
+      .banner-original-price {
+        text-decoration: line-through;
+        opacity: 0.8;
+      }
+
+      .banner-discount-price {
+        font-size: 22px;
+        font-weight: bold;
+      }
+
+      .btn-dark {
+        background-color: #001f3f;
+        padding: 10px 20px;
+      }
+
+      /* Sections */
+      .hero-section,
+      .bundle-section,
+      .included-section,
+      .testimonials-section,
+      .access-section {
+        padding: 60px 20px;
+      }
+      .footer-left,
+      .footer-right {
+        padding: 60px 12vw;
+      }
+      .footer-left {
+        background-color: #00a8e8;
+      }
+      .hero-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding-top: 120px;
+        padding-bottom: 120px;
+        min-height: 100vh;
+      }
+
+      /* Logo */
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      /* Sticky Elements */
+      .sticky-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background-color: #001f3f;
+        padding: 15px 50px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      .bottom-banner {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background-color: #1976d2;
+        padding: 15px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 80%;
+        margin: auto;
+      }
+
+      .banner-content {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .banner-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 5px;
+        background-color: white;
+      }
+
+      .banner-text {
+        font-size: 16px;
+        color: white;
+      }
+
+      .banner-price {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        color: white;
+      }
+
+      .banner-original-price {
+        text-decoration: line-through;
+        opacity: 0.8;
+      }
+
+      .banner-discount-price {
+        font-size: 22px;
+        font-weight: bold;
+      }
+
+      .btn-dark {
+        background-color: #001f3f;
+        padding: 10px 20px;
+      }
+
+      .access-section {
+        background-color: #ffe6e6;
+        color: #333;
+      }
+
+      /* Hero Section */
+      .hero-section {
+        text-align: center;
+        padding-top: 80px;
+        padding-bottom: 80px;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 60px;
+        text-align: left;
+        padding-left: 50px;
+      }
+
+      .hero-title {
+        font-size: 64px;
+        margin-bottom: 40px;
+        line-height: 1.2;
+        font-weight: bold;
+        color: white;
+      }
+
+      .hero-subtitle {
+        font-size: 24px;
+        margin-bottom: 60px;
+        line-height: 1.5;
+        color: white;
+      }
+
+      .orange-text {
+        color: #1976d2;
+      }
+
+      /* Seafood specific styling */
+      .seafood-highlight {
+        color: #00a8e8;
+      }
+
+      .hero-images {
+        display: flex;
+        justify-content: center;
+        margin: 30px 0;
+      }
+
+      .rating {
+        color: #2196f3;
+        font-size: 30px;
+        margin-bottom: 30px;
+      }
+
+      .trust-text {
+        font-size: 22px;
+        margin-top: 20px;
+      }
+
+      .profile-images {
+        display: flex;
+        margin: 60px 0 30px;
+      }
+
+      .profile-image {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: #fff;
+        margin: 0 -10px;
+        border: 2px solid #1976d2;
+        background-image: url("/api/placeholder/60/60");
+        background-size: cover;
+      }
+
+      /* Bundle Section */
+      .bundle-section {
+        text-align: center;
+        padding: 80px 0 120px;
+        background-color: #001f3f;
+      }
+
+      .bundle-container {
+        max-width: 1200px;
+        margin: 50px auto 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+      }
+
+      .bundle-subtitle {
+        font-size: 20px;
+        line-height: 1.6;
+        margin-bottom: 40px;
+      }
+
+      .bundle-image-wrapper {
+        flex: 0 0 400px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .bundle-image {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .bundle-features {
+        flex: 0 0 600px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .feature-item {
+        display: flex;
+        align-items: flex-start;
+        background-color: rgba(255, 85, 0, 0.1);
+        border: 1px solid #1976d2;
+        border-radius: 8px;
+        padding: 15px;
+        text-align: left;
+        width: 100%;
+      }
+
+      .feature-icon {
+        background-color: #1976d2;
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        flex-shrink: 0;
+      }
+
+      .feature-item {
+        display: flex;
+        align-items: flex-start;
+        background-color: rgba(25, 118, 210, 0.1);
+        border: 1px solid #1976d2;
+        border-radius: 8px;
+        padding: 15px;
+        text-align: left;
+        width: 100%;
+        margin-bottom: 15px;
+      }
+
+      .price-container {
+        margin-top: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .discounted-price {
+        font-size: 36px;
+        font-weight: bold;
+      }
+
+      .original-price {
+        text-decoration: line-through;
+        margin-right: 10px;
+        opacity: 0.7;
+        font-size: 20px;
+        color: #1976d2;
+      }
+
+      .btn {
+        background-color: #1976d2;
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .btn-dark {
+        background-color: #001f3f;
+      }
+
+      /* Included Section */
+      .included-section {
+        text-align: center;
+        padding: 80px 20px;
+        background-color: #002b4d;
+      }
+
+      .section-title {
+        font-size: 48px;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+
+      .orange-text {
+        color: #1976d2;
+      }
+
+      .view-docs-btn {
+        margin-top: 50px;
+        display: inline-block;
+      }
+
+      /* Testimonials Section */
+      .testimonials-section {
+        text-align: center;
+        padding: 80px 20px;
+      }
+
+      .testimonials {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .testimonial {
+        background-color: #ffe6e6;
+        color: #333;
+        padding: 20px;
+        margin: 15px;
+        border-radius: 10px;
+        max-width: 320px;
+        text-align: left;
+      }
+
+      .testimonial-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .testimonial-image {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 15px;
+        background-color: #ddd;
+      }
+
+      .testimonial-name {
+        font-weight: bold;
+      }
+
+      .testimonial-stars {
+        color: #1976d2;
+        font-size: 14px;
+      }
+
+      .testimonial-text {
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      /* Access Section */
+      .access-section {
+        text-align: center;
+        padding: 60px 20px;
+        background-color: #f5f5f5;
+      }
+
+      .access-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .access-image {
+        max-width: 100%;
+        height: auto;
+        margin: 30px 0;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Footer Section */
+      .footer-section {
+        background-color: #001f3f;
+        display: flex;
+        justify-content: space-between;
+        border-top: 2px solid #1976d2;
+      }
+
+      .footer-column {
+        max-width: 300px;
+      }
+
+      .footer-title {
+        font-size: 18px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        color: #2196f3;
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 10px;
+      }
+
+      .footer-links a {
+        color: #ddd;
+        text-decoration: none;
+      }
+
+      .footer-links-title {
+        margin-bottom: 10px;
+      }
+
+      .footer-company-info p,
+      .footer-company-info h3 {
+        margin-bottom: 10px;
+      }
+
+      .banner {
+        background-color: #1976d2;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .banner-content {
+        display: flex;
+        align-items: center;
+      }
+
+      .banner-image {
+        width: 40px;
+        height: 40px;
+        margin-right: 15px;
+        background-color: white;
+        border-radius: 5px;
+      }
+
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 36px;
+        }
+
+        .bundle-container {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .bundle-image {
+          margin-right: 0;
+          margin-bottom: 30px;
+        }
+
+        .bundle-features {
+          text-align: center;
+        }
+
+        .feature-item {
+          justify-content: center;
+        }
+
+        .footer-section {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+
+        .footer-column {
+          margin-bottom: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="sticky-header">
+      <div class="logo-container">
+        <svg
+          class="logo-svg"
+          width="40"
+          height="40"
+          viewBox="0 0 800 800"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="400" cy="400" r="380" fill="#1976D2" />
+          <path
+            d="M400 100C250 100 150 250 150 400C150 550 250 700 400 700C550 700 650 550 650 400C650 250 550 100 400 100Z"
+            fill="#2196F3"
+          />
+          <circle cx="320" cy="320" r="30" fill="white" />
+          <path
+            d="M400 450C450 450 500 400 450 300C400 400 350 450 400 450Z"
+            fill="white"
+          />
+          <path
+            d="M550 550C600 500 580 450 530 450C530 500 500 550 550 550Z"
+            fill="#1976D2"
+          />
+        </svg>
+        <div class="logo-text">Sea<span class="blue-text">freshh</span></div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+      <h1 class="hero-title">
+        Master the Art of <span class="blue-text">Seafood</span><br />
+        Cooking – Exclusive <span class="blue-text">eBook</span>
+      </h1>
+      <p class="hero-subtitle">
+        30+ Authentic Seafood Recipes | Just <strong>₹99</strong>
+      </p>
+
+      <div class="profile-images">
+        <div class="profile-image"></div>
+        <div class="profile-image"></div>
+        <div class="profile-image"></div>
+      </div>
+
+      <div class="rating">★ ★ ★ ★ ★</div>
+
+      <p class="trust-text">
+        Trusted by <strong>1000+</strong> Seafood Enthusiasts
+      </p>
+    </div>
+
+    <!-- Bundle Section -->
+    <!-- Bottom Banner -->
+    <div class="bottom-banner">
+      <div class="banner-content">
+        <svg
+          class="banner-icon"
+          width="50"
+          height="50"
+          viewBox="0 0 800 800"
+          xmlns="http://www.w3.org/2000/svg"
+          style="background-color: white; border-radius: 5px; padding: 5px"
+        >
+          <circle cx="400" cy="400" r="380" fill="#1976D2" />
+          <path
+            d="M400 100C250 100 150 250 150 400C150 550 250 700 400 700C550 700 650 550 650 400C650 250 550 100 400 100Z"
+            fill="#2196F3"
+          />
+          <circle cx="320" cy="320" r="30" fill="white" />
+          <path
+            d="M400 450C450 450 500 400 450 300C400 400 350 450 400 450Z"
+            fill="white"
+          />
+          <path
+            d="M550 550C600 500 580 450 530 450C530 500 500 550 550 550Z"
+            fill="#1976D2"
+          />
+        </svg>
+        <div class="banner-text">
+          <strong>Seafood Recipe eBook</strong><br />
+          30+ Authentic Recipes
+        </div>
+      </div>
+      <div class="banner-price">
+        <span class="banner-original-price">Rs 499</span>
+        <span class="banner-discount-price">₹ 99/-</span>
+        <button class="btn btn-dark">Download Now</button>
+      </div>
+    </div>
+
+    <div class="bundle-section">
+      <h2 class="section-title">Startup Growth Bundle</h2>
+      <p>
+        All-in-one templates and documents for startup documentation and success
+      </p>
+
+      <div class="bundle-container">
+        <img
+          src="/api/placeholder/300/400"
+          alt="Startup Growth Bundle Box"
+          class="bundle-image"
+        />
+
+        <div class="bundle-features">
+          <div class="feature-item">
+            <div class="feature-icon">✓</div>
+            <div>
+              Over 1000 customized templates that meet industry standards for
+              startups
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">✓</div>
+            <div>
+              Ready-to-use templates that save hours of documentation work
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">✓</div>
+            <div>
+              Templates aligned with compliance and regulatory requirements
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">✓</div>
+            <div>
+              Proven templates that give your startup a professional appearance
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">✓</div>
+            <div>
+              Lifetime updates to stay current with latest business practices
+            </div>
+          </div>
+
+          <div class="price-section">
+            <div class="price">
+              <span class="original-price">₹ 1,999</span> ₹ 299/-
+            </div>
+            <button class="btn">BUY NOW</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Included Section -->
+    <div class="included-section">
+      <h2 class="section-title">What's Inside? 🏆</h2>
+
+      <p
+        style="
+          font-size: 18px;
+          max-width: 800px;
+          margin: 0 auto 60px auto;
+          line-height: 1.6;
+        "
+      >
+        With our meticulously crafted
+        <span class="blue-text">30+ authentic recipes</span>, you're not just
+        getting a cookbook; you're getting a comprehensive guide to
+        <span class="blue-text">mastering seafood cuisine</span>.
+      </p>
+
+      <div
+        style="
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          max-width: 1000px;
+          margin: 0 auto;
+          gap: 20px;
+        "
+      >
+        <div
+          style="
+            width: 320px;
+            padding: 16px;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+          "
+        >
+          <div
+            style="
+              background-color: #1976d2;
+              color: white;
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-right: 15px;
+            "
+          >
+            ✓
+          </div>
+          <span style="font-size: 18px; font-weight: bold"
+            >Kathiyawadi & Indian Style</span
+          >
+        </div>
+
+        <div
+          style="
+            width: 320px;
+            padding: 16px;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+          "
+        >
+          <div
+            style="
+              background-color: #1976d2;
+              color: white;
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-right: 15px;
+            "
+          >
+            ✓
+          </div>
+          <span style="font-size: 18px; font-weight: bold"
+            >BBQ & Tandoor Fish</span
+          >
+        </div>
+
+        <div
+          style="
+            width: 320px;
+            padding: 16px;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+          "
+        >
+          <div
+            style="
+              background-color: #1976d2;
+              color: white;
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-right: 15px;
+            "
+          >
+            ✓
+          </div>
+          <span style="font-size: 18px; font-weight: bold"
+            >Fish Biryani Recipes</span
+          >
+        </div>
+
+        <div
+          style="
+            width: 320px;
+            padding: 16px;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+          "
+        >
+          <div
+            style="
+              background-color: #1976d2;
+              color: white;
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-right: 15px;
+            "
+          >
+            ✓
+          </div>
+          <span style="font-size: 18px; font-weight: bold"
+            >Fried Fish Recipes</span
+          >
+        </div>
+
+        <div
+          style="
+            width: 320px;
+            padding: 16px;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+          "
+        >
+          <div
+            style="
+              background-color: #1976d2;
+              color: white;
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-right: 15px;
+            "
+          >
+            ✓
+          </div>
+          <span style="font-size: 18px; font-weight: bold">Dry Fish Curry</span>
+        </div>
+
+        <div
+          style="
+            width: 320px;
+            padding: 16px;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+          "
+        >
+          <div
+            style="
+              background-color: #1976d2;
+              color: white;
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-right: 15px;
+            "
+          >
+            ✓
+          </div>
+          <span style="font-size: 18px; font-weight: bold"
+            >Boiling Techniques</span
+          >
+        </div>
+
+        <div
+          style="
+            width: 320px;
+            padding: 16px;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+          "
+        >
+          <div
+            style="
+              background-color: #1976d2;
+              color: white;
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-right: 15px;
+            "
+          >
+            ✓
+          </div>
+          <span style="font-size: 18px; font-weight: bold"
+            >Squid & Lobster Specials</span
+          >
+        </div>
+
+        <div
+          style="
+            width: 320px;
+            padding: 16px;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+          "
+        >
+          <div
+            style="
+              background-color: #1976d2;
+              color: white;
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-right: 15px;
+            "
+          >
+            ✓
+          </div>
+          <span style="font-size: 18px; font-weight: bold">Crab Recipes</span>
+        </div>
+
+        <div
+          style="
+            width: 320px;
+            padding: 16px;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+          "
+        >
+          <div
+            style="
+              background-color: #1976d2;
+              color: white;
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-right: 15px;
+            "
+          >
+            ✓
+          </div>
+          <span style="font-size: 18px; font-weight: bold"
+            >Crab Soup & More!</span
+          >
+        </div>
+
+        <div
+          style="
+            width: 320px;
+            padding: 16px;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+          "
+        >
+          <div
+            style="
+              background-color: #1976d2;
+              color: white;
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-right: 15px;
+            "
+          >
+            ✓
+          </div>
+          <span style="font-size: 18px; font-weight: bold"
+            >10+ Cooking Styles</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- Pro Tips Section -->
+    <div class="included-section" style="background-color: #001f3f">
+      <h2 class="section-title">Pro Chef Tips Included 👨‍🍳</h2>
+
+      <div
+        style="
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          max-width: 1000px;
+          margin: 40px auto 0;
+          gap: 20px;
+        "
+      >
+        <div
+          style="
+            width: 320px;
+            padding: 20px;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+            text-align: left;
+          "
+        >
+          <div
+            style="
+              font-size: 22px;
+              font-weight: bold;
+              color: #2196f3;
+              margin-bottom: 15px;
+            "
+          >
+            Pre-Cooking Essentials
+          </div>
+          <p style="font-size: 16px; line-height: 1.6">
+            Learn what to check before you start! Our detailed guide ensures you
+            have everything prepared for perfect results every time.
+          </p>
+        </div>
+
+        <div
+          style="
+            width: 320px;
+            padding: 20px;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+            text-align: left;
+          "
+        >
+          <div
+            style="
+              font-size: 22px;
+              font-weight: bold;
+              color: #2196f3;
+              margin-bottom: 15px;
+            "
+          >
+            Marination Hacks
+          </div>
+          <p style="font-size: 16px; line-height: 1.6">
+            Discover professional techniques to enhance flavor & texture. Learn
+            the precise timing and ingredients for each seafood type.
+          </p>
+        </div>
+
+        <div
+          style="
+            width: 320px;
+            padding: 20px;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+            text-align: left;
+          "
+        >
+          <div
+            style="
+              font-size: 22px;
+              font-weight: bold;
+              color: #2196f3;
+              margin-bottom: 15px;
+            "
+          >
+            Seafood Quality Guide
+          </div>
+          <p style="font-size: 16px; line-height: 1.6">
+            Master the art of choosing the freshest fish every time. Learn what
+            to look for and what to avoid when purchasing seafood.
+          </p>
+        </div>
+
+        <div
+          style="
+            width: 320px;
+            padding: 20px;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+            text-align: left;
+          "
+        >
+          <div
+            style="
+              font-size: 22px;
+              font-weight: bold;
+              color: #2196f3;
+              margin-bottom: 15px;
+            "
+          >
+            Secret Techniques
+          </div>
+          <p style="font-size: 16px; line-height: 1.6">
+            Get exclusive access to SeaFreshh's proprietary tips for perfect
+            seafood every time! Techniques passed down through generations.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class="testimonials-section">
+      <h2 class="section-title">What People Say</h2>
+      <p>
+        Home chefs and seafood lovers across India<br />are enjoying our
+        exclusive recipes
+      </p>
+
+      <div class="testimonials">
+        <div class="testimonial">
+          <div class="testimonial-header">
+            <div class="testimonial-image"></div>
+            <div>
+              <div class="testimonial-name">Ravi Patel</div>
+              <div class="testimonial-stars" style="color: #2196f3">★★★★★</div>
+            </div>
+          </div>
+          <p class="testimonial-text">
+            The Kathiyawadi fish curry recipe is authentic and delicious! I've
+            tried many recipes before but this one truly captures the
+            traditional flavors. My family loved it!
+          </p>
+        </div>
+
+        <div class="testimonial">
+          <div class="testimonial-header">
+            <div class="testimonial-image"></div>
+            <div>
+              <div class="testimonial-name">Priya Sharma</div>
+              <div class="testimonial-stars" style="color: #2196f3">★★★★★</div>
+            </div>
+          </div>
+          <p class="testimonial-text">
+            The seafood quality guide alone is worth the price! I've always been
+            hesitant to cook seafood at home, but now I know exactly what to
+            look for at the market. Thank you SeaFreshh!
+          </p>
+        </div>
+
+        <div class="testimonial">
+          <div class="testimonial-header">
+            <div class="testimonial-image"></div>
+            <div>
+              <div class="testimonial-name">Ajay Nair</div>
+              <div class="testimonial-stars" style="color: #2196f3">★★★★★</div>
+            </div>
+          </div>
+          <p class="testimonial-text">
+            The tandoori fish recipe changed my weekend BBQ game! The marination
+            technique is simply brilliant. My guests couldn't believe I made it
+            at home without professional equipment.
+          </p>
+        </div>
+
+        <div class="testimonial">
+          <div class="testimonial-header">
+            <div class="testimonial-image"></div>
+            <div>
+              <div class="testimonial-name">Meena Desai</div>
+              <div class="testimonial-stars" style="color: #2196f3">★★★★★</div>
+            </div>
+          </div>
+          <p class="testimonial-text">
+            As someone who always struggled with seafood biryani, these recipes
+            were a revelation! The step-by-step instructions are so clear, and
+            the results are restaurant quality. Highly recommend!
+          </p>
+        </div>
+
+        <div class="testimonial">
+          <div class="testimonial-header">
+            <div class="testimonial-image"></div>
+            <div>
+              <div class="testimonial-name">Vikram Singh</div>
+              <div class="testimonial-stars" style="color: #2196f3">★★★★★</div>
+            </div>
+          </div>
+          <p class="testimonial-text">
+            I'm extremely pleased with this eBook! The crab recipes are
+            outstanding, and the chef tips helped me perfect my technique. This
+            collection is truly worth every rupee and more!
+          </p>
+        </div>
+      </div>
+
+      <button class="btn" style="margin-top: 40px">DOWNLOAD NOW</button>
+    </div>
+
+    <!-- Limited Offer Section -->
+    <div class="access-section">
+      <div class="access-container">
+        <h2 class="section-title" style="color: #333">Limited-Time Offer!</h2>
+
+        <div
+          style="
+            background-color: #1976d2;
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 30px auto;
+            text-align: center;
+          "
+        >
+          <h3 style="font-size: 28px; margin-bottom: 20px">
+            Get Your eBook Today for Just ₹99!
+          </h3>
+          <p style="font-size: 18px; margin-bottom: 20px">
+            📥 Instant Digital Download | 100% Satisfaction Guarantee
+          </p>
+          <p style="font-size: 18px; margin-bottom: 30px">
+            After purchase, the eBook will be delivered to your email address
+            within minutes.
+          </p>
+          <button
+            class="btn"
+            style="
+              background-color: #003366;
+              font-size: 22px;
+              padding: 15px 40px;
+            "
+          >
+            DOWNLOAD NOW
+          </button>
+        </div>
+
+        <div style="max-width: 600px; margin: 40px auto; text-align: center">
+          <p style="font-size: 16px; color: #555; margin-bottom: 20px">
+            <strong>Secure Payment</strong> | <strong>Instant Access</strong> |
+            <strong>100% Satisfaction Guarantee</strong>
+          </p>
+          <p style="font-size: 16px; color: #555">
+            Have questions? Contact us or DM us on social media.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer-section">
+      <div class="footer-left">
+        <div class="footer-icon">
+          <svg
+            width="50"
+            height="50"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="2"
+              y="4"
+              width="20"
+              height="16"
+              rx="2"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path d="M2 7L12 14L22 7" stroke="white" stroke-width="2" />
+          </svg>
+        </div>
+        <div class="footer-company-info">
+          <h3 class="footer-company-name">SEA FRESHH</h3>
+          <p>Contact : +91 9557676740</p>
+          <p>Email : seafreshh@gmail.com</p>
+          <p>Business Hours : Mon-Sat (11:00AM - 7:00PM)</p>
+        </div>
+      </div>
+
+      <div class="footer-right">
+        <div class="footer-icon">
+          <svg
+            width="50"
+            height="50"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M10 13C10 13.4295 10.0776 13.8507 10.2224 14.2405C10.3671 14.6304 10.5767 14.9815 10.8393 15.2728C11.1019 15.5641 11.4123 15.7993 11.7537 15.9649C12.0951 16.1305 12.4602 16.2229 12.8295 16.2373C13.1988 16.2516 13.5658 16.1875 13.9138 16.0487C14.2618 15.9099 14.5829 15.6991 14.8601 15.4285C15.1372 15.158 15.3644 14.8333 15.5293 14.4732C15.6941 14.1131 15.7933 13.7248 15.821 13.331C15.8487 12.9373 15.8045 12.5424 15.6908 12.1652C15.5771 11.788 15.396 11.4361 15.1581 11.127C14.9202 10.8179 14.6304 10.5577 14.3053 10.3612C13.9802 10.1646 13.6259 10.0353 13.2579 9.9797C12.8898 9.924 12.5153 9.9431 12.154 10.0357C11.7926 10.1283 11.4518 10.2928 11.1498 10.5203C10.8478 10.7477 10.59 11.0339 10.3904 11.361C10.1907 11.6881 10.0527 12.0498 9.983 12.4304C9.91324 12.811 9.9129 13.202 9.983 13.583"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M8 11L6 9L8 7"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M16 17L18 15L16 13"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <div class="footer-links">
+          <h3 class="footer-links-title">IMPORTANT LINKS</h3>
+          <ul>
+            <li><a href="#">CONTACT</a></li>
+            <li><a href="#">PRIVACY POLICY</a></li>
+            <li><a href="#">REFUND POLICY</a></li>
+            <li><a href="#">SHIPPING POLICY</a></li>
+            <li><a href="#">TERM OF SERVICES</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
