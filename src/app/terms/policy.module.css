@@ -1,0 +1,136 @@
+/* src/app/terms/policy.module.css (also used by privacy/page.js and refund/page.js) */
+.policyContainer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  color: #ffffff;
+  line-height: 1.6;
+  font-family: Arial, sans-serif;
+}
+
+.policyHeader {
+  text-align: center;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.logoLink {
+  display: inline-block;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+}
+
+.highlight {
+  color: #1976d2;
+}
+
+.policyTitle {
+  font-size: 32px;
+  color: #1976d2;
+  margin-bottom: 10px;
+}
+
+.lastUpdated {
+  font-style: italic;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.policyContent {
+  margin-bottom: 40px;
+}
+
+.policyIntro {
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: #ffffff;
+}
+
+.policySection {
+  margin-bottom: 30px;
+}
+
+.policySection h2 {
+  color: #1976d2;
+  font-size: 22px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 8px;
+}
+
+.policySection ul {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.policySection ul ul {
+  margin-top: 10px;
+}
+
+.policySection li {
+  margin-bottom: 10px;
+}
+
+.policyClosing {
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+.policyFooter {
+  text-align: center;
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 1px solid #e1e1e1;
+  color: #666;
+}
+
+.backLink {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #1976d2;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.backLink:hover {
+  background-color: #1565c0;
+}
+
+@media (max-width: 768px) {
+  .policyTitle {
+    font-size: 28px;
+  }
+
+  .policyIntro {
+    font-size: 16px;
+  }
+
+  .policySection h2 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .policyContainer {
+    padding: 20px 15px;
+  }
+
+  .policyTitle {
+    font-size: 24px;
+  }
+
+  .policySection h2 {
+    font-size: 18px;
+  }
+}

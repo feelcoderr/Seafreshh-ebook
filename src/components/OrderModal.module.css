@@ -1,0 +1,479 @@
+/* src/components/OrderModal.module.css */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1100;
+  padding: 20px;
+  backdrop-filter: blur(8px);
+}
+
+.modalContent {
+  background-color: white;
+  border-radius: 20px;
+  width: 96%;
+  max-width: 1100px;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #333;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+.modalGrid {
+  display: flex;
+  height: 100%;
+}
+
+/* Product column styles */
+.productColumn {
+  flex: 5;
+  background: linear-gradient(135deg, #050a30 0%, #001f3f 100%);
+  color: white;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-y: auto;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.logoWrapper {
+  background-color: white;
+  border-radius: 12px;
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.logoContainer h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.ebookPreview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+}
+
+.ebookImageContainer {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.ebookImage {
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.ebookShadow {
+  position: absolute;
+  bottom: -15px;
+  left: 10%;
+  width: 80%;
+  height: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  filter: blur(10px);
+  z-index: -1;
+  border-radius: 50%;
+}
+
+.ebookPreview h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  background: linear-gradient(90deg, #fff 0%, #d0e1ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ebookDescription {
+  font-size: 16px;
+  opacity: 0.9;
+  margin-bottom: 30px;
+  max-width: 80%;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.featureCard {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.featureIcon {
+  font-size: 24px;
+  margin-right: 12px;
+}
+
+.featureText {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.reviewsContainer {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 20px;
+  margin-top: auto;
+}
+
+.stars {
+  color: #ffca28;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.reviewsContainer p {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* Checkout column styles */
+.checkoutColumn {
+  flex: 4;
+  background-color: #f8f9fc;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.checkoutColumn h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
+.pricingContainer {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.pricingDetails {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.pricingTitle {
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+}
+
+.pricingOriginal {
+  text-decoration: line-through;
+  color: #888;
+  font-size: 16px;
+}
+
+.pricingDiscount {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: #e3f2fd;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.discountLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1976d2;
+}
+
+.discountPrice {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1976d2;
+}
+
+.savingsLabel {
+  text-align: right;
+  font-size: 14px;
+  color: #26a69a;
+  font-weight: 500;
+}
+
+.checkoutForm {
+  margin-bottom: 20px;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+}
+
+.formGroup input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.formGroup input:focus {
+  outline: none;
+  border-color: #1976d2;
+  box-shadow: 0 0 0 4px rgba(25, 118, 210, 0.15);
+}
+
+.phoneInput {
+  display: flex;
+  align-items: center;
+}
+
+.countryCode {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  background-color: #e9ecef;
+  border: 1px solid #ddd;
+  border-right: none;
+  border-radius: 12px 0 0 12px;
+  height: 47px;
+  font-weight: 600;
+  color: #555;
+}
+
+.phoneInput input {
+  border-radius: 0 12px 12px 0;
+}
+
+.error {
+  color: #f44336;
+  font-size: 13px;
+  margin-top: 6px;
+  margin-left: 2px;
+}
+
+.payButton {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(90deg, #1976d2 0%, #2196f3 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+}
+
+.payButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(33, 150, 243, 0.4);
+}
+
+.payButton:disabled {
+  background: linear-gradient(90deg, #90caf9 0%, #bbdefb 100%);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.buttonIcon {
+  margin-right: 10px;
+}
+
+.loadingIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loadingDot {
+  width: 8px;
+  height: 8px;
+  margin: 0 4px;
+  background-color: white;
+  border-radius: 50%;
+  display: inline-block;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.loadingDot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loadingDot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+.securityNotice {
+  background: #fafafa;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.securityItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.securityItem:last-child {
+  margin-bottom: 0;
+}
+
+.securityIcon {
+  margin-right: 10px;
+}
+
+.paymentMethods {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.paymentMethods p {
+  margin: 0;
+  margin-right: 8px;
+  font-size: 14px;
+  color: #999;
+}
+
+.paymentLogo {
+  color: #1976d2;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+@media (max-width: 900px) {
+  .modalGrid {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .productColumn {
+    padding: 30px 20px;
+  }
+
+  .checkoutColumn {
+    padding: 30px 20px;
+  }
+
+  .featureGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .modalContent {
+    width: 100%;
+    border-radius: 0;
+    height: 100%;
+    max-height: 100vh;
+  }
+
+  .closeButton {
+    top: 10px;
+    right: 10px;
+  }
+
+  .ebookPreview h2 {
+    font-size: 24px;
+  }
+
+  .checkoutColumn h2 {
+    font-size: 20px;
+  }
+}

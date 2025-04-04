@@ -1,4 +1,7 @@
+// src/app/layout.js
 import "./globals.css";
+import { AppProvider } from "../context/AppContext";
+import Script from "next/script";
 
 export const metadata = {
   title: "SeaFreshh - Seafood Recipe eBook",
@@ -9,7 +12,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <AppProvider>{children}</AppProvider>
+        <Script
+          id="razorpay-checkout-js"
+          src="https://checkout.razorpay.com/v1/checkout.js"
+          strategy="lazyOnload"
+        />
+      </body>
     </html>
   );
 }

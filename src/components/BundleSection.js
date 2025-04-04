@@ -21,7 +21,7 @@ export default function BundleSection() {
       <div className="bundle-container">
         <div className="bundle-image-wrapper">
           <Image
-            src="/images/ebook-cover.avif"
+            src="/images/ebook-cover.png"
             alt="Seafood Recipe eBook Cover"
             width={300}
             height={450}

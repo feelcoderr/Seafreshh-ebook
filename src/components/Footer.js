@@ -1,3 +1,4 @@
+import Link from "next/link";
 export default function Footer() {
   return (
     <div className="footer-section">
@@ -66,16 +67,13 @@ export default function Footer() {
           <h3 className="footer-links-title">IMPORTANT LINKS</h3>
           <ul>
             <li>
-              <a href="#">CONTACT</a>
+              <Link href="/terms">TERMS OF SERVICE</Link>
             </li>
             <li>
-              <a href="#">PRIVACY POLICY</a>
+              <Link href="/privacy">PRIVACY POLICY</Link>
             </li>
             <li>
-              <a href="#">REFUND POLICY</a>
-            </li>
-            <li>
-              <a href="#">TERM OF SERVICES</a>
+              <Link href="/refund">REFUND POLICY</Link>
             </li>
           </ul>
         </div>

@@ -7,6 +7,7 @@ import ProTipsSection from "../components/ProTipsSection";
 import TestimonialsSection from "../components/TestimonialsSection";
 import LimitedOfferSection from "../components/LimitedOfferSection";
 import Footer from "../components/Footer";
+import GlobalOrderModal from "../components/GlobalOrderModal";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       <LimitedOfferSection />
       <Footer />
       <BannerBottom />
+      <GlobalOrderModal />
     </main>
   );
 }

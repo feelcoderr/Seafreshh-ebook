@@ -1,4 +1,11 @@
+// src/components/LimitedOfferSection.js
+"use client";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
+
 export default function LimitedOfferSection() {
+  const { openOrderModal } = useContext(AppContext);
+
   return (
     <div className="access-section">
       <div className="access-container">
@@ -18,13 +25,13 @@ export default function LimitedOfferSection() {
           }}
         >
           <h3 style={{ fontSize: "28px", marginBottom: "20px" }}>
-            Get Your eBook Today for Just ₹99!
+            Get Your Bundle Today for Just ₹299!
           </h3>
           <p style={{ fontSize: "18px", marginBottom: "20px" }}>
             📥 Instant Digital Download | 100% Satisfaction Guarantee
           </p>
           <p style={{ fontSize: "18px", marginBottom: "30px" }}>
-            After purchase, the eBook will be delivered to your email address
+            After purchase, the bundle will be delivered to your email address
             within minutes.
           </p>
           <button
@@ -34,8 +41,9 @@ export default function LimitedOfferSection() {
               fontSize: "22px",
               padding: "15px 40px",
             }}
+            onClick={openOrderModal}
           >
-            DOWNLOAD NOW
+            BUY NOW
           </button>
         </div>
 

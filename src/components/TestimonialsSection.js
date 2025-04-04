@@ -35,7 +35,18 @@ export default function TestimonialsSection() {
         {testimonials.map((testimonial, index) => (
           <div key={index} className="testimonial">
             <div className="testimonial-header">
-              <div className="testimonial-image"></div>
+              <div className="testimonial-image">
+                <img
+                  src="/images/profile-1.jpg"
+                  width={58}
+                  height={58}
+                  style={{
+                    backgroundColor: "white",
+                    borderRadius: "50%",
+                    margin: "auto",
+                  }}
+                />
+              </div>
               <div>
                 <div className="testimonial-name">{testimonial.name}</div>
                 <div className="testimonial-stars" style={{ color: "#2196f3" }}>
