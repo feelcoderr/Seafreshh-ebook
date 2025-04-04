@@ -8,12 +8,7 @@ import styles from "./thank-you.module.css";
 
 export default function ThankYouPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [countdown, setCountdown] = useState(10);
-
-  // Get the payment ID and email from URL params
-  const paymentId = searchParams.get("payment_id") || "Unknown";
-  const email = searchParams.get("email") || "your email";
 
   // Countdown effect
   useEffect(() => {
