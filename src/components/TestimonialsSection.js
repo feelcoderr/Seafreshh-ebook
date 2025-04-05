@@ -1,4 +1,8 @@
+"use client";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
 export default function TestimonialsSection() {
+  const { openOrderModal } = useContext(AppContext);
   const testimonials = [
     {
       name: "Ravi Patel",
@@ -59,7 +63,11 @@ export default function TestimonialsSection() {
         ))}
       </div>
 
-      <button className="btn" style={{ marginTop: "40px" }}>
+      <button
+        className="btn"
+        style={{ marginTop: "40px" }}
+        onClick={openOrderModal}
+      >
         DOWNLOAD NOW
       </button>
     </div>

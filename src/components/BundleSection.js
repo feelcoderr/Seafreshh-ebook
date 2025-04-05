@@ -1,12 +1,16 @@
+"use client";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
 import Image from "next/image";
 
 export default function BundleSection() {
+  const { openOrderModal } = useContext(AppContext);
   const features = [
-    "Over 1000 customized templates that meet industry standards for startups",
-    "Ready-to-use templates that save hours of documentation work",
-    "Templates aligned with compliance and regulatory requirements",
-    "Proven templates that give your startup a professional appearance",
-    "Lifetime updates to stay current with latest business practices",
+    "30થી પણ વધુ વિવિધ પ્રકારની સીફૂડ રેસીપી જેમાં કાઠીયાવાડી, ઇન્ડિયન, BBQ, ફ્રાય, ફિશ બિરયાની અને સૂપ વગેરે.",
+    "સીફૂડ બનાવતા પહેલા ધ્યાનમાં રાખવામાં આવતા અમુક પરિબળો ની વિગતવાર માહિતી.",
+    " ⁠સીફ્રેશ ની ખાસ પદ્ધતિઓ અને ટીપ્સ જે સ્વાદ બમણો કરી દેશે.",
+    " ⁠ફક્ત 99 રૂપિયામાં સીફૂડ કૂકિંગ ની વિગતવાર માહિતી તમે સરળ ભાષામાં મેળવી શકશો",
+    "જો તમે પહેલી વખત સીફૂડ ટ્રાય કરતા હોય તો આ બુક તમારા માટે ખૂબ જ ફાયદાકારક રહેશે",
   ];
 
   return (
@@ -23,8 +27,8 @@ export default function BundleSection() {
           <Image
             src="/images/ebook-cover.png"
             alt="Seafood Recipe eBook Cover"
-            width={300}
-            height={450}
+            width={500}
+            height={800}
             className="bundle-image"
           />
         </div>
@@ -40,7 +44,9 @@ export default function BundleSection() {
               <span className="original-price">₹ 499</span>
               <span className="discounted-price">₹ 99/-</span>
             </div>
-            <button className="btn">DOWNLOAD NOW</button>
+            <button className="btn" onClick={openOrderModal}>
+              DOWNLOAD NOW
+            </button>
           </div>
         </div>
       </div>
