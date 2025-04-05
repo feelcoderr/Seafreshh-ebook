@@ -9,15 +9,20 @@ body {
   color: white;
   font-family: Arial, sans-serif;
   background-color: #daedff;
-  padding-top: 60px; /* For the fixed header */
-  padding-bottom: 80px; /* For the fixed bottom banner */
+  /* padding-top: 60px; For the fixed header */
+  /* padding-bottom: 80px; For the fixed bottom banner */
   background-image: linear-gradient(
       rgba(255, 255, 255, 0.95),
       rgba(169, 169, 169, 0.95)
     ),
-    url("/images/placeholder.jpg");
+    url("/images/favicon.png");
   background-size: cover;
   background-attachment: fixed;
+}
+
+main {
+  padding-top: 60px;
+  padding-bottom: 80px;
 }
 
 /* Sticky Elements */
@@ -107,6 +112,19 @@ body {
 .btn-dark {
   background-color: #001f3f;
   padding: 10px 20px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
 }
 
 /* Sections */

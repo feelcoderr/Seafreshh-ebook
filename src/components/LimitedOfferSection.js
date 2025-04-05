@@ -13,7 +13,7 @@ export default function LimitedOfferSection() {
 
         <div className={styles.offerCard}>
           <h3 className={styles.offerHeading}>
-            Get Your Bundle Today for Just <del>₹499</del> ₹99!
+            Get Your Bundle Today for Just <del>₹199</del> ₹99!
           </h3>
           <p className={styles.offerDetail}>
             📥 Instant Digital Download | 100% Satisfaction Guarantee

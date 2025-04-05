@@ -42,7 +42,7 @@ export default function BundleSection() {
           ))}
           <div className={styles.priceContainer}>
             <div className={styles.price}>
-              <span className={styles.originalPrice}>₹ 499</span>
+              <span className={styles.originalPrice}>₹ 199</span>
               <span className={styles.discountedPrice}>₹ 99/-</span>
             </div>
             <button className={styles.btn} onClick={openOrderModal}>

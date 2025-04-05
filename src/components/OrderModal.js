@@ -177,13 +177,13 @@ export default function OrderModal({ isOpen, onClose, onSubmit }) {
                 <div className={styles.pricingTitle}>
                   SeaFreshh Recipe eBook
                 </div>
-                <div className={styles.pricingOriginal}>₹499</div>
+                <div className={styles.pricingOriginal}>₹199</div>
               </div>
               <div className={styles.pricingDiscount}>
                 <div className={styles.discountLabel}>Limited Time Offer</div>
                 <div className={styles.discountPrice}>₹99</div>
               </div>
-              <div className={styles.savingsLabel}>You save ₹400 (80%)</div>
+              <div className={styles.savingsLabel}>You save ₹100 (50%)</div>
             </div>
 
             <form onSubmit={handleSubmit} className={styles.checkoutForm}>

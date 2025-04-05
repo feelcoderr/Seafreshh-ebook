@@ -27,7 +27,7 @@ export default function BannerBottom() {
       </div>
       <div className={styles.bannerPrice}>
         <div className={styles.priceContainer}>
-          <span className={styles.originalPrice}>Rs 499</span>
+          <span className={styles.originalPrice}>Rs 199</span>
           <span className={styles.discountPrice}>₹ 99/-</span>
         </div>
         <button className={styles.downloadButton} onClick={openOrderModal}>
