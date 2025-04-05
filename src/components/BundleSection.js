@@ -2,6 +2,7 @@
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import Image from "next/image";
+import styles from "./BundleSection.module.css";
 
 export default function BundleSection() {
   const { openOrderModal } = useContext(AppContext);
@@ -14,37 +15,37 @@ export default function BundleSection() {
   ];
 
   return (
-    <div className="bundle-section">
-      <h2 className="section-title">Seafood Recipe eBook</h2>
-      <p className="bundle-subtitle">
-        Welcome to Your <span className="blue-text">One-Stop Solution</span> for
-        Authentic
-        <br />
+    <div className={styles.bundleSection}>
+      <h2 className={styles.sectionTitle}>Seafood Recipe eBook</h2>
+      <p className={styles.bundleSubtitle}>
+        Welcome to Your{" "}
+        <span className={styles.blueText}>One-Stop Solution</span> for Authentic
+        <br className={styles.desktopOnly} />
         Seafood Recipes and Cooking Techniques!
       </p>
-      <div className="bundle-container">
-        <div className="bundle-image-wrapper">
+      <div className={styles.bundleContainer}>
+        <div className={styles.bundleImageWrapper}>
           <Image
             src="/images/ebook-cover.png"
             alt="Seafood Recipe eBook Cover"
             width={500}
             height={800}
-            className="bundle-image"
+            className={styles.bundleImage}
           />
         </div>
-        <div className="bundle-features">
+        <div className={styles.bundleFeatures}>
           {features.map((feature, index) => (
-            <div key={index} className="feature-item">
-              <div className="feature-icon">✓</div>
-              <div>{feature}</div>
+            <div key={index} className={styles.featureItem}>
+              <div className={styles.featureIcon}>✓</div>
+              <div className={styles.featureText}>{feature}</div>
             </div>
           ))}
-          <div className="price-container">
-            <div className="price">
-              <span className="original-price">₹ 499</span>
-              <span className="discounted-price">₹ 99/-</span>
+          <div className={styles.priceContainer}>
+            <div className={styles.price}>
+              <span className={styles.originalPrice}>₹ 499</span>
+              <span className={styles.discountedPrice}>₹ 99/-</span>
             </div>
-            <button className="btn" onClick={openOrderModal}>
+            <button className={styles.btn} onClick={openOrderModal}>
               DOWNLOAD NOW
             </button>
           </div>

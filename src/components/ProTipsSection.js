@@ -1,3 +1,6 @@
+import React from "react";
+import styles from "./ProTipsSection.module.css";
+
 export default function ProTipsSection() {
   const tips = [
     {
@@ -23,43 +26,14 @@ export default function ProTipsSection() {
   ];
 
   return (
-    <div className="included-section" style={{ backgroundColor: "#001f3f" }}>
-      <h2 className="section-title">Pro Chef Tips Included 👨‍🍳</h2>
+    <div className={styles.proTipsSection}>
+      <h2 className={styles.sectionTitle}>Pro Chef Tips Included 👨‍🍳</h2>
 
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          maxWidth: "1000px",
-          margin: "40px auto 0",
-          gap: "20px",
-        }}
-      >
+      <div className={styles.tipsContainer}>
         {tips.map((tip, index) => (
-          <div
-            key={index}
-            style={{
-              width: "320px",
-              padding: "20px",
-              border: "2px solid #1976d2",
-              borderRadius: "8px",
-              textAlign: "left",
-            }}
-          >
-            <div
-              style={{
-                fontSize: "22px",
-                fontWeight: "bold",
-                color: "#2196f3",
-                marginBottom: "15px",
-              }}
-            >
-              {tip.title}
-            </div>
-            <p style={{ fontSize: "16px", lineHeight: "1.6" }}>
-              {tip.description}
-            </p>
+          <div key={index} className={styles.tipCard}>
+            <div className={styles.tipTitle}>{tip.title}</div>
+            <p className={styles.tipDescription}>{tip.description}</p>
           </div>
         ))}
       </div>

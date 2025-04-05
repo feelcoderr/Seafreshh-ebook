@@ -1,0 +1,295 @@
+/* Banner Bottom Styles */
+.bottomBanner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #1976d2;
+  padding: 15px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 80%;
+  margin: 0 auto;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.bannerContent {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logoWrapper {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  background-color: white;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logoImage {
+  width: 100%;
+  height: auto;
+}
+
+.bannerText {
+  font-size: 16px;
+  color: white;
+  line-height: 1.4;
+}
+
+.recipeCount {
+  display: inline-block;
+  opacity: 0.9;
+}
+
+.bannerPrice {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: white;
+}
+
+.priceContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.originalPrice {
+  text-decoration: line-through;
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+.discountPrice {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.downloadButton {
+  background-color: #001f3f;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.downloadButton:hover {
+  background-color: #00152a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Large Tablet Responsiveness */
+@media (max-width: 1024px) {
+  .bottomBanner {
+    max-width: 90%;
+    padding: 12px 30px;
+  }
+}
+
+/* Tablet Responsiveness */
+@media (max-width: 768px) {
+  .bottomBanner {
+    max-width: 100%;
+    padding: 12px 20px;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .logoWrapper {
+    width: 40px;
+    height: 40px;
+  }
+
+  .bannerText {
+    font-size: 14px;
+  }
+
+  .originalPrice {
+    font-size: 12px;
+  }
+
+  .discountPrice {
+    font-size: 18px;
+  }
+
+  .downloadButton {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  .bottomBanner {
+    padding: 15px;
+    border-radius: 15px 15px 0 0;
+    flex-direction: row;
+    align-items: center;
+    background-image: linear-gradient(135deg, #1976d2, #1565c0);
+  }
+
+  .bannerContent {
+    gap: 12px;
+    flex: 1;
+  }
+
+  .logoWrapper {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .bannerText {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .bannerPrice {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+
+  .priceContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .originalPrice {
+    font-size: 12px;
+    margin-bottom: 3px;
+    display: inline-block;
+  }
+
+  .discountPrice {
+    font-size: 18px;
+  }
+
+  .downloadButton {
+    background-color: #ffffff;
+    color: #1976d2;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+  }
+
+  .downloadButton:hover {
+    background-color: #f0f8ff;
+    transform: translateY(-2px);
+  }
+}
+
+/* Small Mobile Responsiveness */
+@media (max-width: 480px) {
+  .bottomBanner {
+    flex-direction: column;
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .bannerContent {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .logoWrapper {
+    width: 44px;
+    height: 44px;
+    padding: 4px;
+  }
+
+  .bannerText {
+    font-size: 15px;
+    line-height: 1.3;
+  }
+
+  .bannerPrice {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .priceContainer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .originalPrice {
+    font-size: 12px;
+    margin-bottom: 2px;
+  }
+
+  .discountPrice {
+    font-size: 20px;
+  }
+
+  .downloadButton {
+    padding: 10px 18px;
+    font-size: 15px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #1565c0;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Very Small Mobile Devices */
+@media (max-width: 360px) {
+  .bottomBanner {
+    padding: 12px 10px;
+  }
+
+  .bannerContent {
+    gap: 10px;
+  }
+
+  .logoWrapper {
+    width: 38px;
+    height: 38px;
+  }
+
+  .bannerText {
+    font-size: 13px;
+  }
+
+  .desktopBreak {
+    display: none;
+  }
+
+  .recipeCount {
+    margin-left: 4px;
+  }
+
+  .discountPrice {
+    font-size: 18px;
+    margin-top: 2px;
+  }
+
+  .downloadButton {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+}

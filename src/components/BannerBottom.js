@@ -1,33 +1,36 @@
 "use client";
-import FishLogo from "./FishLogo";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
+import Image from "next/image";
+import styles from "./BannerBottom.module.css";
 
 export default function BannerBottom() {
   const { openOrderModal } = useContext(AppContext);
+
   return (
-    <div className="bottom-banner">
-      <div className="banner-content">
-        <img
-          src="/images/favicon.png"
-          width={50}
-          height={50}
-          style={{
-            backgroundColor: "white",
-            borderRadius: "5px",
-            padding: "5px",
-          }}
-        />
-        <div className="banner-text">
+    <div className={styles.bottomBanner}>
+      <div className={styles.bannerContent}>
+        <div className={styles.logoWrapper}>
+          <Image
+            src="/images/favicon.png"
+            width={50}
+            height={50}
+            alt="Seafood eBook Logo"
+            className={styles.logoImage}
+          />
+        </div>
+        <div className={styles.bannerText}>
           <strong>Seafood Recipe eBook</strong>
-          <br />
-          30+ Authentic Recipes
+          <br className={styles.desktopBreak} />
+          <span className={styles.recipeCount}>30+ Authentic Recipes</span>
         </div>
       </div>
-      <div className="banner-price">
-        <span className="banner-original-price">Rs 499</span>
-        <span className="banner-discount-price">₹ 99/-</span>
-        <button className="btn btn-dark" onClick={openOrderModal}>
+      <div className={styles.bannerPrice}>
+        <div className={styles.priceContainer}>
+          <span className={styles.originalPrice}>Rs 499</span>
+          <span className={styles.discountPrice}>₹ 99/-</span>
+        </div>
+        <button className={styles.downloadButton} onClick={openOrderModal}>
           Download Now
         </button>
       </div>

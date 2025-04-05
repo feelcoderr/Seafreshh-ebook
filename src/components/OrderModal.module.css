@@ -10,8 +10,10 @@
   justify-content: center;
   align-items: center;
   z-index: 1100;
-  padding: 20px;
+  padding: 0;
   backdrop-filter: blur(8px);
+  /* This prevents body scrolling when modal is open */
+  overflow: hidden;
 }
 
 .modalContent {
@@ -20,9 +22,10 @@
   width: 96%;
   max-width: 1100px;
   max-height: 90vh;
-  overflow: hidden;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
   position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+  /* Critical fix: This enables scrolling inside the modal */
+  overflow: auto;
 }
 
 .closeButton {
@@ -50,7 +53,7 @@
 
 .modalGrid {
   display: flex;
-  height: 100%;
+  /* Remove height: 100% that causes issues */
 }
 
 /* Product column styles */
@@ -62,7 +65,6 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow-y: auto;
 }
 
 .logoContainer {
@@ -126,6 +128,7 @@
   background: linear-gradient(90deg, #fff 0%, #d0e1ff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .ebookDescription {
@@ -196,7 +199,6 @@
   padding: 40px;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
 }
 
 .checkoutColumn h2 {
@@ -437,43 +439,123 @@
   font-size: 16px;
 }
 
+/* Mobile Responsiveness */
 @media (max-width: 900px) {
+  .modalOverlay {
+    padding: 0;
+    /* Make sure overlay takes full screen on mobile */
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  /* Make the modal fill the entire screen on mobile */
+  .modalContent {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    border-radius: 0;
+    display: block; /* Change from flex to block */
+    overflow: auto; /* Enable scrolling on the entire modal */
+  }
+
+  /* Stack the columns vertically */
   .modalGrid {
-    flex-direction: column;
+    display: block; /* Change from flex to block */
+  }
+
+  .productColumn,
+  .checkoutColumn {
+    width: 100%; /* Full width */
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  /* Make the image smaller on mobile */
+  .ebookImageContainer {
+    width: 160px;
+    margin: 0 auto 20px;
+  }
+
+  .ebookImage {
+    width: 100%;
     height: auto;
   }
 
-  .productColumn {
-    padding: 30px 20px;
-  }
-
-  .checkoutColumn {
-    padding: 30px 20px;
-  }
-
+  /* Simplify the features grid */
   .featureGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    max-width: 100%;
+    margin: 0 auto 20px;
+  }
+
+  .featureCard {
+    padding: 10px;
+  }
+
+  .featureIcon {
+    font-size: 20px;
+  }
+
+  /* Reduce spacing */
+  .ebookPreview h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .ebookDescription {
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+
+  .reviewsContainer {
+    margin-top: 20px;
   }
 }
 
 @media (max-width: 600px) {
-  .modalContent {
-    width: 100%;
-    border-radius: 0;
-    height: 100%;
-    max-height: 100vh;
-  }
-
   .closeButton {
     top: 10px;
     right: 10px;
   }
 
-  .ebookPreview h2 {
-    font-size: 24px;
-  }
-
   .checkoutColumn h2 {
     font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .pricingContainer {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  .formGroup {
+    margin-bottom: 15px;
+  }
+
+  .formGroup label {
+    margin-bottom: 5px;
+  }
+
+  .formGroup input {
+    padding: 10px 14px;
+  }
+
+  .featureGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .payButton {
+    padding: 14px;
+  }
+}
+
+/* Fix for scrolling inside modal */
+@media screen and (max-height: 800px) {
+  .modalContent {
+    max-height: 90vh;
+    overflow-y: auto;
   }
 }

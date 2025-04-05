@@ -1,56 +1,46 @@
 import Image from "next/image";
+import styles from "./HeroSection.module.css";
 
 export default function HeroSection() {
   return (
-    <div className="hero-section">
-      <h1 className="hero-title">
-        Master the Art of <span className="blue-text">Seafood</span>
-        <br />
-        Cooking – Exclusive <span className="blue-text">eBook</span>
+    <div className={styles.heroSection}>
+      <h1 className={styles.heroTitle}>
+        Master the Art of <span className={styles.accentText}>Seafood</span>
+        <br className={styles.desktopBreak} />
+        Cooking – Exclusive <span className={styles.accentText}>eBook</span>
       </h1>
-      <p className="hero-subtitle">
-        30+ Authentic Seafood Recipes | Just <strong>₹99</strong>
+      <p className={styles.heroSubtitle}>
+        30+ Authentic Seafood Recipes | Just{" "}
+        <strong className={styles.priceHighlight}>₹99</strong>
       </p>
-      <div className="profile-images">
-        <div className="profile-image">
-          <img
+      <div className={styles.profileImages}>
+        <div className={styles.profileImage}>
+          <Image
             src="/images/profile-1.jpg"
             width={58}
             height={58}
-            style={{
-              backgroundColor: "white",
-              borderRadius: "50%",
-              margin: "auto",
-            }}
+            alt="Profile 1"
           />
         </div>
-        <div className="profile-image">
-          <img
+        <div className={styles.profileImage}>
+          <Image
             src="/images/profile-2.jpg"
             width={58}
             height={58}
-            style={{
-              backgroundColor: "white",
-              borderRadius: "50%",
-              margin: "auto",
-            }}
+            alt="Profile 2"
           />
         </div>
-        <div className="profile-image">
-          <img
+        <div className={styles.profileImage}>
+          <Image
             src="/images/profile-3.jpg"
             width={58}
             height={58}
-            style={{
-              backgroundColor: "white",
-              borderRadius: "50%",
-              margin: "auto",
-            }}
+            alt="Profile 3"
           />
         </div>
       </div>
-      <div className="rating">★ ★ ★ ★ ★</div>
-      <p className="trust-text">
+      <div className={styles.rating}>★ ★ ★ ★ ★</div>
+      <p className={styles.trustText}>
         Trusted by <strong>1000+</strong> Seafood Enthusiasts
       </p>
     </div>

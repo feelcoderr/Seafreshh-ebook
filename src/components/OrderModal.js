@@ -1,6 +1,7 @@
 // src/components/OrderModal.js
 "use client";
 import { useState } from "react";
+import { useEffect } from "react";
 import Image from "next/image";
 import FishLogo from "./FishLogo";
 import styles from "./OrderModal.module.css";
@@ -29,7 +30,17 @@ export default function OrderModal({ isOpen, onClose, onSubmit }) {
       });
     }
   };
+  useEffect(() => {
+    if (isOpen) {
+      // Disable scrolling on the body when modal is open
+      document.body.style.overflow = "hidden";
+    }
 
+    // Clean up function to re-enable scrolling when modal closes
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
   const validate = () => {
     const newErrors = {};
 

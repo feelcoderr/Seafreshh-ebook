@@ -1,0 +1,53 @@
+/* Header Styles with New Color Scheme */
+.stickyHeader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: white;
+  padding: 15px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  transition: padding 0.3s ease;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoText {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333333;
+}
+
+.accentText {
+  color: #1976d2;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .stickyHeader {
+    padding: 12px 20px;
+  }
+
+  .logoText {
+    font-size: 20px;
+  }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+  .stickyHeader {
+    padding: 10px 16px;
+  }
+
+  .logoText {
+    font-size: 18px;
+  }
+}
