@@ -1,3 +1,7 @@
+import { Resend } from "resend";
+import { downloadFileFromDrive } from "../../../lib/googleDrive.js";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(request) {
   try {
     // Google Drive file IDs for your PDFs
@@ -14,6 +18,14 @@ export async function POST(request) {
 
       const { email, paymentId } = await request.json();
       console.log(`Sending email to ${email} for payment ${paymentId}`);
+
+      // Current date for the email
+      const today = new Date();
+      const dateString = today.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
 
       const msg = {
         from: "Seafreshh <noreply@book.seafreshh.in>",
