@@ -1,9 +1,10 @@
 import { google } from "googleapis";
+import credentialsFile from "./credentials.json";
 
 export async function getGoogleDriveAuth() {
-  console.log(process.env.GOOGLE_SERVICE_ACCOUNT_KEY);
+  console.log("credentials : ", credentialsFile);
   const auth = new google.auth.GoogleAuth({
-    credentials: JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY), // Store credentials in environment variable
+    credentials: credentialsFile,
     scopes: ["https://www.googleapis.com/auth/drive.readonly"],
   });
 
