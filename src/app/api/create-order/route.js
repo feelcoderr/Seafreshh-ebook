@@ -14,7 +14,7 @@ export async function POST(request) {
 
     // Create order
     const options = {
-      amount: 9900, // in paisa (₹299)
+      amount: 100, // in paisa (₹299)
       currency: "INR",
       receipt: `receipt_${Date.now()}`,
       notes: {
