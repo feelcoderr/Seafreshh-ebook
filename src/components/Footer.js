@@ -7,7 +7,7 @@ export default function Footer() {
           <svg
             width="50"
             height="50"
-            viewBox="0 0 24 24"
+            viewBox="0 0 24 2t4"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -25,8 +25,8 @@ export default function Footer() {
         </div>
         <div className="footer-company-info">
           <h3 className="footer-company-name">SEA FRESHH</h3>
-          <p>Contact : +91 9557676740</p>
-          <p>Email : seafreshh@gmail.com</p>
+          <p>Contact : +91 7096313892</p>
+          <p>Email : seafreshh786@gmail.com</p>
           <p>Business Hours : Mon-Sat (11:00AM - 7:00PM)</p>
         </div>
       </div>
