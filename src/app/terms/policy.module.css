@@ -3,7 +3,7 @@
   max-width: 900px;
   margin: 0 auto;
   padding: 40px 20px;
-  color: #ffffff;
+  color: #000000;
   line-height: 1.6;
   font-family: Arial, sans-serif;
 }
@@ -39,7 +39,7 @@
 
 .lastUpdated {
   font-style: italic;
-  color: #ffffff;
+  color: #000000;
   font-size: 14px;
 }
 
@@ -50,7 +50,7 @@
 .policyIntro {
   font-size: 18px;
   margin-bottom: 30px;
-  color: #ffffff;
+  color: #000000;
 }
 
 .policySection {
