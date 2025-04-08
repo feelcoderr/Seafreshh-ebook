@@ -44,7 +44,6 @@ export async function getGoogleDriveAuth() {
       "https://www.googleapis.com/robot/v1/metadata/x509/seafreshh-ebook%40seafreshh-ebook.iam.gserviceaccount.com",
     universe_domain: "googleapis.com",
   };
-  console.log("credentials : ", credentialsFile);
   const auth = new google.auth.GoogleAuth({
     credentials: credentials,
     scopes: ["https://www.googleapis.com/auth/drive.readonly"],
