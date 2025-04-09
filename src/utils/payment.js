@@ -77,7 +77,7 @@ export const handleFormSubmit = async (formData) => {
         if (verifyData.success) {
           // Redirect to thank you page with parameters
           // The email will be sent from the thank-you page
-          window.location.href = `/thank-you?payment_id=${response.razorpay_payment_id}&email=${encodeURIComponent(formData.email)}`;
+          window.location.href = `/thank-you`;
         } else {
           alert("Payment verification failed. Please contact support.");
         }
