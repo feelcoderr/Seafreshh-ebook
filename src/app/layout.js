@@ -7,6 +7,11 @@ export const metadata = {
   title: "SeaFreshh - Seafood Recipe eBook",
   description:
     "Master the Art of Seafood Cooking with our exclusive eBook featuring 30+ authentic seafood recipes",
+  icons: {
+    icon: [{ url: "/favicon.ico" }],
+    shortcut: ["/favicon.ico"],
+    apple: [{ url: "/favicon.ico" }],
+  },
 };
 
 export default function RootLayout({ children }) {

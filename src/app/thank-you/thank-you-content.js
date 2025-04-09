@@ -7,60 +7,60 @@ import Link from "next/link";
 import styles from "./thank-you.module.css";
 
 export default function ThankYouContent() {
-  const searchParams = useSearchParams();
-  const payment_id = searchParams.get("payment_id");
-  const email = searchParams.get("email");
-  const [emailStatus, setEmailStatus] = useState("idle"); // idle, sending, success, error
+  // const searchParams = useSearchParams();
+  // const payment_id = searchParams.get("payment_id");
+  // const email = searchParams.get("email");
+  const [emailStatus, setEmailStatus] = useState("success"); // idle, sending, success, error
 
-  useEffect(() => {
-    // Only send email if we have the required parameters
-    if (payment_id && email) {
-      // Check if this specific payment has already had an email sent
-      const emailSentKey = `email_sent_${payment_id}`;
-      const wasEmailSent = localStorage.getItem(emailSentKey);
+  // useEffect(() => {
+  //   // Only send email if we have the required parameters
+  //   if (payment_id && email) {
+  //     // Check if this specific payment has already had an email sent
+  //     // const emailSentKey = `email_sent_${payment_id}`;
+  //     // const wasEmailSent = localStorage.getItem(emailSentKey);
 
-      if (!wasEmailSent && emailStatus === "idle") {
-        // Email hasn't been sent yet for this payment
-        sendEmailWithPDFs();
-      } else if (wasEmailSent) {
-        // Email was already sent, update the UI to reflect that
-        setEmailStatus("success");
-      }
-    }
-  }, [payment_id, email, emailStatus]);
+  //     if (!wasEmailSent && emailStatus === "idle") {
+  //       // Email hasn't been sent yet for this payment
+  //       sendEmailWithPDFs();
+  //     } else if (wasEmailSent) {
+  //       // Email was already sent, update the UI to reflect that
+  //       setEmailStatus("success");
+  //     }
+  //   }
+  // }, [payment_id, email, emailStatus]);
 
-  const sendEmailWithPDFs = async () => {
-    try {
-      setEmailStatus("sending");
+  // const sendEmailWithPDFs = async () => {
+  //   try {
+  //     setEmailStatus("sending");
 
-      // Call your send API endpoint
-      const response = await fetch("/api/send", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          paymentId: payment_id,
-        }),
-      });
+  //     // Call your send API endpoint
+  //     // const response = await fetch("/api/send", {
+  //     //   method: "POST",
+  //     //   headers: {
+  //     //     "Content-Type": "application/json",
+  //     //   },
+  //     //   body: JSON.stringify({
+  //     //     email,
+  //     //     paymentId: payment_id,
+  //     //   }),
+  //     // });
 
-      const result = await response.json();
+  //     // const result = await response.json();
 
-      if (response.ok) {
-        // Mark this payment as having had an email sent
-        localStorage.setItem(`email_sent_${payment_id}`, "true");
-        setEmailStatus("success");
-        console.log("Email sent successfully:", result);
-      } else {
-        setEmailStatus("error");
-        console.error("Failed to send email:", result);
-      }
-    } catch (error) {
-      setEmailStatus("error");
-      console.error("Error sending email:", error);
-    }
-  };
+  //     if (response.ok) {
+  //       // Mark this payment as having had an email sent
+  //       // localStorage.setItem(`email_sent_${payment_id}`, "true");
+  //       setEmailStatus("success");
+  //       console.log("Email sent successfully:", result);
+  //     } else {
+  //       setEmailStatus("error");
+  //       console.error("Failed to send email:", result);
+  //     }
+  //   } catch (error) {
+  //     setEmailStatus("error");
+  //     console.error("Error sending email:", error);
+  //   }
+  // };
 
   return (
     <div className={styles.container}>
@@ -87,7 +87,7 @@ export default function ThankYouContent() {
 
         {/* Email Status Section with Loader */}
         <div className={styles.emailStatusContainer}>
-          {emailStatus === "sending" && (
+          {/* {emailStatus === "sending" && (
             <div className={styles.sendingContainer}>
               <div className={styles.loader}>
                 <div className={styles.spinnerBox}>
@@ -101,7 +101,7 @@ export default function ThankYouContent() {
                 </p>
               </div>
             </div>
-          )}
+          )} */}
 
           {emailStatus === "success" && (
             <div className={styles.successContainer}>
@@ -120,14 +120,12 @@ export default function ThankYouContent() {
               </div>
               <div className={styles.successText}>
                 <h3>eBooks Sent Successfully!</h3>
-                <p>
-                  The eBooks have been sent to <strong>{email}</strong>
-                </p>
+                <p>The eBooks have been sent.</p>
               </div>
             </div>
           )}
 
-          {emailStatus === "error" && (
+          {/* {emailStatus === "error" && (
             <div className={styles.errorContainer}>
               <div className={styles.errorIcon}>
                 <svg viewBox="0 0 24 24" width="40" height="40">
@@ -153,7 +151,7 @@ export default function ThankYouContent() {
                 </button>
               </div>
             </div>
-          )}
+          )} */}
         </div>
 
         <div className={styles.details}>
@@ -165,8 +163,8 @@ export default function ThankYouContent() {
                 <div className={styles.instructionText}>
                   <strong>Check your email</strong>
                   <p>
-                    We've sent your eBook to {email}. Please check your inbox
-                    (and spam folder if needed).
+                    We've sent your eBook. Please check your inbox (and spam
+                    folder if needed).
                   </p>
                 </div>
               </li>
