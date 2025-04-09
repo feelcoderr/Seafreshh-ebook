@@ -9,10 +9,14 @@ export async function POST(request) {
   console.log("Razorpay webhook received");
 
   try {
-    const rawBody = await request.text();
+    // Clone the request to ensure we can read the body as text
+    const clonedRequest = request.clone();
+
+    // Get the raw request body as text
+    const rawBody = await clonedRequest.text();
 
     const razorpaySignature = request.headers.get("x-razorpay-signature");
-
+    console.log("razorpay signature", razorpaySignature);
     if (!razorpaySignature) {
       console.error("Missing Razorpay signature header");
       return NextResponse.json({ error: "Missing signature" }, { status: 401 });
@@ -20,7 +24,7 @@ export async function POST(request) {
 
     // Verify webhook signature using your webhook secret
     const webhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET;
-    console.log(webhookSecret);
+    console.log("webhook secret", webhookSecret);
     if (!webhookSecret) {
       console.error("RAZORPAY_WEBHOOK_SECRET environment variable is not set");
       return NextResponse.json(
