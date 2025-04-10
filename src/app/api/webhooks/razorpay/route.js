@@ -1,7 +1,7 @@
 // app/api/webhooks/razorpay/route.js
 import { NextResponse } from "next/server";
 import crypto from "crypto";
-import { sendEmailWithPDFs } from "../../../../lib/emailService.js";
+import { sendSimpleEmailWithPDFs } from "../../../../lib/emailService.js";
 
 export const maxDuration = 60;
 
@@ -91,7 +91,7 @@ export async function POST(request) {
       console.log(`Processing payment ${paymentId} for email ${customerEmail}`);
 
       try {
-        sendEmailWithPDFs(customerEmail, { orderId: paymentId })
+        sendSimpleEmailWithPDFs(customerEmail, { orderId: paymentId })
           .then((result) => {
             console.log(
               `Email sent successfully to ${customerEmail} for payment ${paymentId}`
