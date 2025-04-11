@@ -91,28 +91,24 @@ export async function POST(request) {
       console.log(`Processing payment ${paymentId} for email ${customerEmail}`);
 
       try {
-        sendSimpleEmailWithPDFs(customerEmail, { orderId: paymentId })
-          .then((result) => {
-            console.log(
-              `Email sent successfully to ${customerEmail} for payment ${paymentId}`
-            );
-          })
-          .catch((error) => {
-            console.error(`Failed to send email to ${customerEmail}:`, error);
-          });
+        console.log(`Sending email to ${customerEmail}`);
+        // Actually await the email sending to completion
+        await sendSimpleEmailWithPDFs(customerEmail, { orderId: paymentId });
+        console.log(`Email sent successfully to ${customerEmail}`);
 
-        // Respond to Razorpay immediately
         return NextResponse.json({
-          status: "processing",
-          message: "Email sending initiated",
+          status: "success",
+          message: "Email sent successfully",
         });
       } catch (emailError) {
-        console.error(`Error initiating email sending:`, emailError);
-        // Still return a 200 response to Razorpay
-        return NextResponse.json({
-          status: "error",
-          message: "Error initiating email sending",
-        });
+        console.error(`Error sending email:`, emailError);
+        return NextResponse.json(
+          {
+            status: "error",
+            message: "Error sending email",
+          },
+          { status: 500 }
+        );
       }
     }
 
