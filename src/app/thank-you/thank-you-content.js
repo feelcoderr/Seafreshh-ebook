@@ -7,60 +7,29 @@ import Link from "next/link";
 import styles from "./thank-you.module.css";
 
 export default function ThankYouContent() {
-  // const searchParams = useSearchParams();
-  // const payment_id = searchParams.get("payment_id");
-  // const email = searchParams.get("email");
-  const [emailStatus, setEmailStatus] = useState("success"); // idle, sending, success, error
+  const searchParams = useSearchParams();
+  const status = searchParams.get("status");
+  const [email, setEmail] = useState("");
+  const [orderId, setOrderId] = useState("");
 
-  // useEffect(() => {
-  //   // Only send email if we have the required parameters
-  //   if (payment_id && email) {
-  //     // Check if this specific payment has already had an email sent
-  //     // const emailSentKey = `email_sent_${payment_id}`;
-  //     // const wasEmailSent = localStorage.getItem(emailSentKey);
+  useEffect(() => {
+    // Retrieve stored data from successful payment
+    const storedEmail = localStorage.getItem("seafreshh_email");
+    const storedOrderId = localStorage.getItem("seafreshh_order_id");
 
-  //     if (!wasEmailSent && emailStatus === "idle") {
-  //       // Email hasn't been sent yet for this payment
-  //       sendEmailWithPDFs();
-  //     } else if (wasEmailSent) {
-  //       // Email was already sent, update the UI to reflect that
-  //       setEmailStatus("success");
-  //     }
-  //   }
-  // }, [payment_id, email, emailStatus]);
+    if (storedEmail) setEmail(storedEmail);
+    if (storedOrderId) setOrderId(storedOrderId);
+  }, []);
 
-  // const sendEmailWithPDFs = async () => {
-  //   try {
-  //     setEmailStatus("sending");
+  // Determine email status based on URL param
+  const getEmailStatus = () => {
+    if (status === "verification-error") {
+      return "pending";
+    }
+    return "success";
+  };
 
-  //     // Call your send API endpoint
-  //     // const response = await fetch("/api/send", {
-  //     //   method: "POST",
-  //     //   headers: {
-  //     //     "Content-Type": "application/json",
-  //     //   },
-  //     //   body: JSON.stringify({
-  //     //     email,
-  //     //     paymentId: payment_id,
-  //     //   }),
-  //     // });
-
-  //     // const result = await response.json();
-
-  //     if (response.ok) {
-  //       // Mark this payment as having had an email sent
-  //       // localStorage.setItem(`email_sent_${payment_id}`, "true");
-  //       setEmailStatus("success");
-  //       console.log("Email sent successfully:", result);
-  //     } else {
-  //       setEmailStatus("error");
-  //       console.error("Failed to send email:", result);
-  //     }
-  //   } catch (error) {
-  //     setEmailStatus("error");
-  //     console.error("Error sending email:", error);
-  //   }
-  // };
+  const emailStatus = getEmailStatus();
 
   return (
     <div className={styles.container}>
@@ -85,24 +54,8 @@ export default function ThankYouContent() {
           </p>
         </div>
 
-        {/* Email Status Section with Loader */}
+        {/* Email Status Section */}
         <div className={styles.emailStatusContainer}>
-          {/* {emailStatus === "sending" && (
-            <div className={styles.sendingContainer}>
-              <div className={styles.loader}>
-                <div className={styles.spinnerBox}>
-                  <div className={styles.spinnerCircle}></div>
-                </div>
-              </div>
-              <div className={styles.sendingText}>
-                <h3>Sending your eBooks...</h3>
-                <p>
-                  We're sending your recipe books to <strong>{email}</strong>
-                </p>
-              </div>
-            </div>
-          )} */}
-
           {emailStatus === "success" && (
             <div className={styles.successContainer}>
               <div className={styles.successIcon}>
@@ -119,19 +72,31 @@ export default function ThankYouContent() {
                 </svg>
               </div>
               <div className={styles.successText}>
-                <h3>eBooks Sent Successfully!</h3>
-                <p>The eBooks have been sent.</p>
+                <h3>eBooks On The Way!</h3>
+                {email && (
+                  <p>
+                    Your recipe books have been sent to <strong>{email}</strong>
+                  </p>
+                )}
+                {!email && (
+                  <p>Your recipe books have been sent to your email address.</p>
+                )}
+                {orderId && (
+                  <p className={styles.orderReference}>
+                    Order Reference: <strong>{orderId}</strong>
+                  </p>
+                )}
               </div>
             </div>
           )}
 
-          {/* {emailStatus === "error" && (
-            <div className={styles.errorContainer}>
-              <div className={styles.errorIcon}>
+          {emailStatus === "pending" && (
+            <div className={styles.pendingContainer}>
+              <div className={styles.pendingIcon}>
                 <svg viewBox="0 0 24 24" width="40" height="40">
-                  <circle cx="12" cy="12" r="11" fill="#F44336" />
+                  <circle cx="12" cy="12" r="11" fill="#FF9800" />
                   <path
-                    d="M8 8l8 8M16 8l-8 8"
+                    d="M12 7v6M12 17v.5"
                     stroke="#fff"
                     strokeWidth="2.5"
                     fill="none"
@@ -140,18 +105,25 @@ export default function ThankYouContent() {
                   />
                 </svg>
               </div>
-              <div className={styles.errorText}>
-                <h3>Failed to Send eBooks</h3>
-                <p>We encountered an issue sending your eBooks.</p>
-                <button
-                  onClick={sendEmailWithPDFs}
-                  className={styles.retryButton}
-                >
-                  Try Again
-                </button>
+              <div className={styles.pendingText}>
+                <h3>eBooks Processing</h3>
+                <p>
+                  Your recipes are being processed and will be sent to your
+                  email shortly.
+                </p>
+                {email && (
+                  <p>
+                    They will be delivered to <strong>{email}</strong>
+                  </p>
+                )}
+                {orderId && (
+                  <p className={styles.orderReference}>
+                    Order Reference: <strong>{orderId}</strong>
+                  </p>
+                )}
               </div>
             </div>
-          )} */}
+          )}
         </div>
 
         <div className={styles.details}>
@@ -163,18 +135,18 @@ export default function ThankYouContent() {
                 <div className={styles.instructionText}>
                   <strong>Check your email</strong>
                   <p>
-                    We've sent your eBook. Please check your inbox (and spam
-                    folder if needed).
+                    Your eBooks will arrive within 5-10 minutes. Please check
+                    your inbox (and spam/promotions folders if needed).
                   </p>
                 </div>
               </li>
               <li>
                 <div className={styles.iconCircle}>📁</div>
                 <div className={styles.instructionText}>
-                  <strong>Download your eBook</strong>
+                  <strong>Save your eBooks</strong>
                   <p>
-                    Click the download link in the email to get your copy of the
-                    SeaFreshh Recipe eBook.
+                    The email includes both English and Gujarati versions.
+                    Download and save them to your device for easy access.
                   </p>
                 </div>
               </li>
@@ -189,6 +161,23 @@ export default function ThankYouContent() {
                 </div>
               </li>
             </ul>
+          </div>
+
+          <div className={styles.supportSection}>
+            <h3>Need Help?</h3>
+            <p>
+              If you don't receive your eBooks within 30 minutes, please contact
+              our support team at{" "}
+              <a
+                href="mailto:support@seafreshh.in"
+                className={styles.emailLink}
+              >
+                support@seafreshh.in
+              </a>
+            </p>
+            <Link href="/" className={styles.homeButton}>
+              Return to Home
+            </Link>
           </div>
         </div>
       </div>
