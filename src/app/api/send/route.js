@@ -5,6 +5,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request) {
   try {
+    console.log("process.version- ", process.version);
     // Google Drive file IDs for your PDFs
     const pdf1FileId = process.env.PDF1_FILE_ID;
     const pdf2FileId = process.env.PDF2_FILE_ID;
