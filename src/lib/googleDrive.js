@@ -15,7 +15,8 @@ export async function getGoogleDriveAuth() {
   try {
     // Parse credentials from environment variable
     // const credentials = JSON.parse(credentialsJson);
-    const credentials = {
+    /* old google drive cred
+      const credentials = {
       type: "service_account",
       project_id: "seafreshh-ebook",
       private_key_id: "43d9c1686ca0136a34ef4c2b1da1b5c45c47be67",
@@ -56,10 +57,14 @@ export async function getGoogleDriveAuth() {
       client_x509_cert_url:
         "https://www.googleapis.com/robot/v1/metadata/x509/seafreshh-ebook%40seafreshh-ebook.iam.gserviceaccount.com",
       universe_domain: "googleapis.com",
-    };
+    };*/
+
+    const credentials = JSON.parse(
+      process.env.NEXT_PUBLIC_GOOGLE_CREDENTIALS_JSON
+    );
 
     const auth = new google.auth.GoogleAuth({
-      credentials: credentials,
+      credentials,
       scopes: ["https://www.googleapis.com/auth/drive.readonly"],
     });
 
