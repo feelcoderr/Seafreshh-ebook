@@ -8,8 +8,14 @@ import TestimonialsSection from "../components/TestimonialsSection";
 import LimitedOfferSection from "../components/LimitedOfferSection";
 import Footer from "../components/Footer";
 import GlobalOrderModal from "../components/GlobalOrderModal";
+import Maintenance from "@/components/Maintenance";
+
+const IS_MAINTENANCE_MODE = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true";
 
 export default function Home() {
+  if (IS_MAINTENANCE_MODE) {
+    return <Maintenance />;
+  }
   return (
     <main>
       <Header />
