@@ -1,5 +1,16 @@
 // lib/googleDrive.js
 import { google } from "googleapis";
+// Add this at the very top of the file (first import)
+import crypto from "crypto";
+import { createRequire } from "module";
+
+// Optional legacy fix for Vercel
+try {
+  crypto.createHash("md4");
+} catch {
+  // Load legacy provider (not always needed but safe)
+  process.env.NODE_OPTIONS = "--openssl-legacy-provider";
+}
 
 // Use environment variables instead of hardcoding credentials
 export async function getGoogleDriveAuth() {

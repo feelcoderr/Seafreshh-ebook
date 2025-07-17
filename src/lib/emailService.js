@@ -37,7 +37,8 @@ export async function sendEmailWithPDFs(
     // Download PDFs from Google Drive in parallel
     console.log("Downloading PDFs from Google Drive");
     let pdf1Buffer, pdf2Buffer;
-
+    console.log("Node version:", process.version);
+    console.log("NODE_OPTIONS:", process.env.NODE_OPTIONS);
     try {
       [pdf1Buffer, pdf2Buffer] = await Promise.all([
         downloadFileFromDrive(pdf1FileId),
