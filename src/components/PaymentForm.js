@@ -52,7 +52,7 @@ export default function PaymentForm() {
         description: "SeaFreshh Recipe eBook",
         handler: async function (response) {
           // Send eBook after payment verification
-          const sendData = await fetch("/api/send-ebook", {
+          const sendData = await fetch("/api/send", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
