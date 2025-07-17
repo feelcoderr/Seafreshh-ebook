@@ -12,5 +12,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
