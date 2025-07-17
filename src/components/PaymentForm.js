@@ -47,7 +47,7 @@ export default function PaymentForm() {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         name: "SeaFreshh",
         currency: "INR",
-        amount: 9900,
+        amount: process.env.NEXT_PUBLIC_EBOOK_PRICE,
         order_id: data.orderId,
         description: "SeaFreshh Recipe eBook",
         handler: async function (response) {
