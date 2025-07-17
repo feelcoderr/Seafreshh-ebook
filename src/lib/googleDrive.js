@@ -70,53 +70,61 @@ export async function getGoogleDriveAuth() {
       universe_domain: "googleapis.com",
     };*/
 
-    const credentials = {
-      type: "service_account",
-      project_id: "seafreshh-drive-access",
-      private_key_id: "17ae0a6b85df2a3234462c1c2e7ffe62e566f869",
-      private_key:
-        "-----BEGIN PRIVATE KEY-----\n" +
-        "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDyQTEaX/cW9xfl\n" +
-        "vjTC8/KFgdj9MXL/9K9xtNAt9F8Ojogi/3EyZwucs0BbNqgh5H95wVYy58cnuhEs\n" +
-        "C8d1XvhdGAZEh+s6+ilDFItd/5ROffWqvLWvCwB5uKjO4Dy06nERUoQ7F/Ead2oJ\n" +
-        "KoS0LfYmuFdIYqtEYrr1pEmNaEG4DWc+QKaxFL4NONuRuCYfhSA7O0Gz6zK3Qx7F\n" +
-        "oLsgRS7XE+MxU93rRo9WPn7iyof4C7WyGuIx7+Aw966x1D0/pg28+huFNWnVeiga\n" +
-        "GzQBmGuX0+2+f/u5dRmDZ5+HWz9v/hXX78NAgxDONbpNaZufb32saVZtn+z3gy1q\n" +
-        "FybG0vGHAgMBAAECggEAH8XcHlTyz+DFkhzRx7X+G3ON1ZtsNVTOw++OlFBmPT8F\n" +
-        "bO2q14z7UWiTKsNu5s8Uxw/L8e5DSRsW0HuVA/haQ794ZvmaqQgRbFpf8wqn1Wmg\n" +
-        "1G1euOANBmnpPgTcAXB0NuznKeb4eNurnRsl/4m9rJNl4zkJtHTsh3YuLW08nVpn\n" +
-        "Wj2k21eEOay0d+2vXg0Q1RKEy0clbAXWXOImNLk9gYTRW0AdluUV0z6evEK5UsN0\n" +
-        "KKskx1HyMNVmCUlisw1FFjqn2N0ItbhdLtmqcE5oMAp4LBQe2PddCX/VkGNshqZq\n" +
-        "qaaw7LxAUXJq56EAsMHTOg4qywD8gsNtckn6BezNvQKBgQD6ZVL2ELHx+ACMeVh3\n" +
-        "NQRGU1STjKhtOJdqkudXff9vNrIN8l2gkwNoXbFvINwOVRJrJRfF8H9isn1SuGWb\n" +
-        "ce6+HULOH+ctMPhZS+j91Ts8TvdY5DRLGuWocXudVZb966rWQE3zIGkmJOjZlw1V\n" +
-        "LNtwETt5FPdldXmjrj1PAI1z1QKBgQD3rTjUYabZcySO/Z/ArLDOKtAnRaf7rhPb\n" +
-        "ycDoIKDoVQlOgWiceLDZ+NIZZVorBlJcExJJUYP7nelKP3giHFga/0/z9OxDcMHB\n" +
-        "P2+KiNhLA6BWxMD6SPzGatfMhM1T0P0IOUEH4aQX6SXpPml9RTfj2przEWTkQn87\n" +
-        "+o+38Hqp6wKBgQDQm+nqJy6ZMM0EO3SAnCLblEE6TE1l8Wf02j7ynX5Z4W+mPu3S\n" +
-        "AaktIiHZO78aEbYundCYkC0QxTOz3vyH7PvCWA54PAwVkl7VxnBuSV/4drGL1VPb\n" +
-        "3qTHGQSrp8sL8XN63EgU7kOsC8QSw83P0HdhfnnV/qm+VYjp3Rgm4Yb3oQKBgCJY\n" +
-        "YwkQgZKl5OvvP7f4OoxcY4EOp7y+5wITeCy4WZfeMuwwBdGs6tlPJ9NduqM8vS8H\n" +
-        "dgG0zBiYTUF+i6ovRAh6Xxv1Ws3/VN73bQBI+bVtS068+gW7GVJqfoJd6Bs3X99E\n" +
-        "EUCGibrHGfq+LOKyNo3iQppyTwtYLUyj8koPjvMBAoGAGgzUAEGxVKiMIF3FVY+S\n" +
-        "93x+DJe/+1AslgJd+hFubmdIyD+PoKZeM8BVpcZqwzYzAYnnUm5scoS9EhurbEt4\n" +
-        "rFRWnoq8GjpwxAgrWb7oaiMpnvnAX9a5C+CqikdkX2UhRfJMb8Aii8KUj0Xn8iXB\n" +
-        "UHu5n981LDzsH48kns/sMeg=\n" +
-        "-----END PRIVATE KEY-----\n" +
-        "",
-      client_email:
-        "drive-access@seafreshh-drive-access.iam.gserviceaccount.com",
-      client_id: "111468440486514750264",
-      auth_uri: "https://accounts.google.com/o/oauth2/auth",
-      token_uri: "https://oauth2.googleapis.com/token",
-      auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
-      client_x509_cert_url:
-        "https://www.googleapis.com/robot/v1/metadata/x509/drive-access%40seafreshh-drive-access.iam.gserviceaccount.com",
-      universe_domain: "googleapis.com",
-    };
+    // const credentials = {
+    //   type: "service_account",
+    //   project_id: "seafreshh-drive-access",
+    //   private_key_id: "17ae0a6b85df2a3234462c1c2e7ffe62e566f869",
+    //   private_key:
+    //     "-----BEGIN PRIVATE KEY-----\n" +
+    //     "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDyQTEaX/cW9xfl\n" +
+    //     "vjTC8/KFgdj9MXL/9K9xtNAt9F8Ojogi/3EyZwucs0BbNqgh5H95wVYy58cnuhEs\n" +
+    //     "C8d1XvhdGAZEh+s6+ilDFItd/5ROffWqvLWvCwB5uKjO4Dy06nERUoQ7F/Ead2oJ\n" +
+    //     "KoS0LfYmuFdIYqtEYrr1pEmNaEG4DWc+QKaxFL4NONuRuCYfhSA7O0Gz6zK3Qx7F\n" +
+    //     "oLsgRS7XE+MxU93rRo9WPn7iyof4C7WyGuIx7+Aw966x1D0/pg28+huFNWnVeiga\n" +
+    //     "GzQBmGuX0+2+f/u5dRmDZ5+HWz9v/hXX78NAgxDONbpNaZufb32saVZtn+z3gy1q\n" +
+    //     "FybG0vGHAgMBAAECggEAH8XcHlTyz+DFkhzRx7X+G3ON1ZtsNVTOw++OlFBmPT8F\n" +
+    //     "bO2q14z7UWiTKsNu5s8Uxw/L8e5DSRsW0HuVA/haQ794ZvmaqQgRbFpf8wqn1Wmg\n" +
+    //     "1G1euOANBmnpPgTcAXB0NuznKeb4eNurnRsl/4m9rJNl4zkJtHTsh3YuLW08nVpn\n" +
+    //     "Wj2k21eEOay0d+2vXg0Q1RKEy0clbAXWXOImNLk9gYTRW0AdluUV0z6evEK5UsN0\n" +
+    //     "KKskx1HyMNVmCUlisw1FFjqn2N0ItbhdLtmqcE5oMAp4LBQe2PddCX/VkGNshqZq\n" +
+    //     "qaaw7LxAUXJq56EAsMHTOg4qywD8gsNtckn6BezNvQKBgQD6ZVL2ELHx+ACMeVh3\n" +
+    //     "NQRGU1STjKhtOJdqkudXff9vNrIN8l2gkwNoXbFvINwOVRJrJRfF8H9isn1SuGWb\n" +
+    //     "ce6+HULOH+ctMPhZS+j91Ts8TvdY5DRLGuWocXudVZb966rWQE3zIGkmJOjZlw1V\n" +
+    //     "LNtwETt5FPdldXmjrj1PAI1z1QKBgQD3rTjUYabZcySO/Z/ArLDOKtAnRaf7rhPb\n" +
+    //     "ycDoIKDoVQlOgWiceLDZ+NIZZVorBlJcExJJUYP7nelKP3giHFga/0/z9OxDcMHB\n" +
+    //     "P2+KiNhLA6BWxMD6SPzGatfMhM1T0P0IOUEH4aQX6SXpPml9RTfj2przEWTkQn87\n" +
+    //     "+o+38Hqp6wKBgQDQm+nqJy6ZMM0EO3SAnCLblEE6TE1l8Wf02j7ynX5Z4W+mPu3S\n" +
+    //     "AaktIiHZO78aEbYundCYkC0QxTOz3vyH7PvCWA54PAwVkl7VxnBuSV/4drGL1VPb\n" +
+    //     "3qTHGQSrp8sL8XN63EgU7kOsC8QSw83P0HdhfnnV/qm+VYjp3Rgm4Yb3oQKBgCJY\n" +
+    //     "YwkQgZKl5OvvP7f4OoxcY4EOp7y+5wITeCy4WZfeMuwwBdGs6tlPJ9NduqM8vS8H\n" +
+    //     "dgG0zBiYTUF+i6ovRAh6Xxv1Ws3/VN73bQBI+bVtS068+gW7GVJqfoJd6Bs3X99E\n" +
+    //     "EUCGibrHGfq+LOKyNo3iQppyTwtYLUyj8koPjvMBAoGAGgzUAEGxVKiMIF3FVY+S\n" +
+    //     "93x+DJe/+1AslgJd+hFubmdIyD+PoKZeM8BVpcZqwzYzAYnnUm5scoS9EhurbEt4\n" +
+    //     "rFRWnoq8GjpwxAgrWb7oaiMpnvnAX9a5C+CqikdkX2UhRfJMb8Aii8KUj0Xn8iXB\n" +
+    //     "UHu5n981LDzsH48kns/sMeg=\n" +
+    //     "-----END PRIVATE KEY-----\n" +
+    //     "",
+    //   client_email:
+    //     "drive-access@seafreshh-drive-access.iam.gserviceaccount.com",
+    //   client_id: "111468440486514750264",
+    //   auth_uri: "https://accounts.google.com/o/oauth2/auth",
+    //   token_uri: "https://oauth2.googleapis.com/token",
+    //   auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
+    //   client_x509_cert_url:
+    //     "https://www.googleapis.com/robot/v1/metadata/x509/drive-access%40seafreshh-drive-access.iam.gserviceaccount.com",
+    //   universe_domain: "googleapis.com",
+    // };
 
     const auth = new google.auth.GoogleAuth({
-      credentials,
+      credentials: {
+        client_email:
+          "drive-access@seafreshh-drive-access.iam.gserviceaccount.com",
+        private_key: process.env.NEXT_PUBLIC_GOOGLE_PRIVATE_KEY.replace(
+          /\\n/g,
+          "\n"
+        ),
+        project_id: "seafreshh-drive-access",
+      },
       scopes: ["https://www.googleapis.com/auth/drive.readonly"],
     });
 
@@ -126,7 +134,6 @@ export async function getGoogleDriveAuth() {
     throw new Error("Failed to initialize Google Drive authentication");
   }
 }
-
 export async function downloadFileFromDrive(fileId) {
   try {
     if (!fileId) {
@@ -134,7 +141,41 @@ export async function downloadFileFromDrive(fileId) {
     }
 
     const auth = await getGoogleDriveAuth();
-    const drive = google.drive({ version: "v3", auth });
+    const authClient = await auth.getClient(); // ✅ IMPORTANT
+    const drive = google.drive({ version: "v3", auth: authClient });
+
+    console.log(`Downloading file ${fileId} from Google Drive`);
+
+    const response = await drive.files.get(
+      {
+        fileId,
+        alt: "media",
+      },
+      { responseType: "arraybuffer" }
+    );
+
+    console.log(
+      `Successfully downloaded file ${fileId} (${response.data.length} bytes)`
+    );
+    return Buffer.from(response.data);
+  } catch (error) {
+    console.error(
+      `Error downloading from Google Drive (file ${fileId}):`,
+      error
+    );
+    throw error;
+  }
+}
+
+/*export async function downloadFileFromDrive(fileId) {
+  try {
+    if (!fileId) {
+      throw new Error("File ID is required");
+    }
+
+    const auth = await getGoogleDriveAuth();
+    // const drive = google.drive({ version: "v3", auth });
+    const drive = google.drive({ version: "v3", auth: await auth.getClient() });
 
     // Add more detailed logging
     console.log(`Downloading file ${fileId} from Google Drive`);
@@ -170,7 +211,7 @@ export async function downloadFileFromDrive(fileId) {
     );
     throw error;
   }
-}
+}*/
 
 // import { google } from "googleapis";
 // import credentialsFile from "./credentials.json";
