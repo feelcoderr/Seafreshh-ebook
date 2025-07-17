@@ -15,7 +15,10 @@ export async function POST(request) {
       key_id: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
       key_secret: process.env.RAZORPAY_SECRET_KEY,
     });
-
+    console.log(
+      "process.env.NEXT_PUBLIC_EBOOK_PRICE",
+      process.env.NEXT_PUBLIC_EBOOK_PRICE
+    );
     // Create order
     const order = await razorpay.orders.create({
       amount: process.env.NEXT_PUBLIC_EBOOK_PRICE, // in paisa
