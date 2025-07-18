@@ -43,7 +43,7 @@ export const handleFormSubmit = async (formData) => {
       key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
       name: "Seafreshh",
       currency: "INR",
-      amount: 9900, // in paisa
+      amount: process.env.NEXT_PUBLIC_EBOOK_PRICE, // in paisa
       order_id: orderData.orderId,
       description: "Master the Art of Seafood Cooking",
       image: "/images/logo.png", // your logo
