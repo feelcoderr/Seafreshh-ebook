@@ -1,4 +1,6 @@
 // src/app/api/verify-payment/route.js
+export const runtime = "nodejs";
+
 import { NextResponse } from "next/server";
 import crypto from "crypto";
 import { sendEmailWithPDFs } from "../../../lib/emailService.js";

@@ -26,6 +26,9 @@ export async function sendEmailWithPDFs(
   retryCount = 0
 ) {
   try {
+    console.log("SMTP_USER:", process.env.SMTP_USER);
+    console.log("PDF1_FILE_ID:", process.env.PDF1_FILE_ID);
+
     if (!customerEmail || !orderDetails?.orderId) {
       throw new Error("Missing customer email or order ID");
     }
