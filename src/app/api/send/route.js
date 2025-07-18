@@ -1,9 +1,19 @@
 import { Resend } from "resend";
 import { downloadFileFromDrive } from "../../../lib/googleDrive.js";
+import nodemailer from "nodemailer";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request) {
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: process.env.NEXT_PUBLIC_SMTP_USER,
+      pass: process.env.NEXT_PUBLIC_SMTP_PASS,
+    },
+  });
   try {
     console.log("process.version- ", process.version);
     // Google Drive file IDs for your PDFs
@@ -108,13 +118,22 @@ export async function POST(request) {
         },
       ],
     };
-    const { data, error } = await resend.emails.send(msg);
+    /*const { data, error } = await resend.emails.send(msg);
 
     if (error) {
       return Response.json({ error }, { status: 500 });
     }
 
-    return Response.json(data);
+    return Response.json(data);*/
+    try {
+      const info = await transporter.sendMail(msg);
+
+      return Response.json(info);
+    } catch (error) {
+      if (error) {
+        return Response.json({ error }, { status: 500 });
+      }
+    }
   } catch (error) {
     return Response.json({ error }, { status: 500 });
   }
