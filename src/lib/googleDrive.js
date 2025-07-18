@@ -114,17 +114,11 @@ export async function getGoogleDriveAuth() {
     //     "https://www.googleapis.com/robot/v1/metadata/x509/drive-access%40seafreshh-drive-access.iam.gserviceaccount.com",
     //   universe_domain: "googleapis.com",
     // };
-
+    const credentials = JSON.parse(
+      process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON
+    );
     const auth = new google.auth.GoogleAuth({
-      credentials: {
-        client_email:
-          "drive-access@seafreshh-drive-access.iam.gserviceaccount.com",
-        private_key: process.env.NEXT_PUBLIC_GOOGLE_PRIVATE_KEY.replace(
-          /\\n/g,
-          "\n"
-        ),
-        project_id: "seafreshh-drive-access",
-      },
+      credentials,
       scopes: ["https://www.googleapis.com/auth/drive.readonly"],
     });
 
