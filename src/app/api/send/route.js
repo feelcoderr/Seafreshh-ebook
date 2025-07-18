@@ -1,8 +1,8 @@
-import { Resend } from "resend";
+// import { Resend } from "resend";
 import { downloadFileFromDrive } from "../../../lib/googleDrive.js";
 import nodemailer from "nodemailer";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request) {
   const transporter = nodemailer.createTransport({
