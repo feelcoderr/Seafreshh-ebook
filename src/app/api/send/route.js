@@ -25,7 +25,7 @@ export async function POST(request) {
     });
 
     const msg = {
-      from: "Seafreshh <noreply@book.seafreshh.in>",
+      from: '"Seafreshh" <noreply@book.seafreshh.in>',
       to: email,
       subject: "Your SeaFreshh Recipe eBook is Here! 🦐",
       text: "Thank you for purchasing our SeaFreshh Recipe eBook!",
