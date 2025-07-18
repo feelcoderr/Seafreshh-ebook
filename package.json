@@ -2,6 +2,7 @@
   "dependencies": {
     "googleapis": "^148.0.0",
     "next": "^15.2.4",
+    "nodemailer": "^7.0.5",
     "razorpay": "^2.9.6",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -14,6 +15,6 @@
     "lint": "next lint"
   },
   "engines": {
-    "node": "18.x"
+    "node": "22.x"
   }
 }

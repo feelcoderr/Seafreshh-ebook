@@ -1,8 +1,19 @@
 // lib/emailService.js
 import { Resend } from "resend";
 import { downloadFileFromDrive } from "./googleDrive.js";
+import nodemailer from "nodemailer";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false, // true for 465, false for other ports
+  auth: {
+    user: process.env.NEXT_PUBLIC_SMTP_USER,
+    pass: process.env.NEXT_PUBLIC_SMTP_PASS,
+  },
+});
 
 // Maximum retries for email sending
 const MAX_RETRIES = 3;
@@ -150,25 +161,30 @@ export async function sendEmailWithPDFs(
     };
 
     console.log(`Sending email to ${customerEmail}`);
-    const { data, error } = await resend.emails.send(emailData);
+    // sending email using node mailer
 
-    if (error) {
-      console.error("Resend API error:", error);
+    try {
+      const info = await transporter.sendMail(emailData);
+      console.log(`Email sent successfully to ${customerEmail}`);
+      return { success: true, info };
+    } catch (error) {
+      if (error) {
+        console.error("Resend API error:", error);
 
-      // Retry logic for email sending
-      if (retryCount < MAX_RETRIES) {
-        console.log(`Retrying email in ${RETRY_DELAY}ms...`);
-        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
-        return sendEmailWithPDFs(customerEmail, orderDetails, retryCount + 1);
-      } else {
-        throw new Error(
-          `Email sending failed after ${MAX_RETRIES} attempts: ${error.message || "Unknown error"}`
-        );
+        // Retry logic for email sending
+        if (retryCount < MAX_RETRIES) {
+          console.log(`Retrying email in ${RETRY_DELAY}ms...`);
+          await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
+          return sendEmailWithPDFs(customerEmail, orderDetails, retryCount + 1);
+        } else {
+          throw new Error(
+            `Email sending failed after ${MAX_RETRIES} attempts: ${error.message || "Unknown error"}`
+          );
+        }
       }
     }
 
-    console.log(`Email sent successfully to ${customerEmail}`);
-    return { success: true, data };
+    // const { data, error } = await resend.emails.send(emailData);
   } catch (error) {
     console.error(`Failed to send email to ${customerEmail}:`, error);
 
@@ -367,7 +383,34 @@ export async function sendSimpleEmailWithPDFs(customerEmail, orderDetails) {
       </div>
     `;
 
-    const { data, error } = await resend.emails.send({
+    try {
+      const info = await transporter.sendMail({
+        from: "Seafreshh <noreply@book.seafreshh.in>",
+        to: customerEmail,
+        subject: "Your SeaFreshh Recipe eBook is Here! 🦐",
+        html: simpleHtml,
+        attachments: [
+          {
+            filename: "SeaFreshh-Recipes-Gujarati.pdf",
+            content: pdf1Buffer,
+          },
+          {
+            filename: "SeaFreshh-Recipes-English.pdf",
+            content: pdf2Buffer,
+          },
+        ],
+      });
+
+      return { success: true, data };
+    } catch (error) {
+      if (error) {
+        console.error("Resend API error:", error);
+        throw new Error(
+          `Email sending failed: ${error.message || "Unknown error"}`
+        );
+      }
+    }
+    /*const { data, error } = await resend.emails.send({
       from: "Seafreshh <noreply@book.seafreshh.in>",
       to: customerEmail,
       subject: "Your SeaFreshh Recipe eBook is Here! 🦐",
@@ -382,16 +425,7 @@ export async function sendSimpleEmailWithPDFs(customerEmail, orderDetails) {
           content: pdf2Buffer,
         },
       ],
-    });
-
-    if (error) {
-      console.error("Resend API error:", error);
-      throw new Error(
-        `Email sending failed: ${error.message || "Unknown error"}`
-      );
-    }
-
-    return { success: true, data };
+    });*/
   } catch (error) {
     console.error(`Failed to send email to ${customerEmail}:`, error);
     throw error;
