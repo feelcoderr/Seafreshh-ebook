@@ -332,68 +332,68 @@ export async function sendEmailWithPDFs(
 //   }
 // }
 
-// export async function sendSimpleEmailWithPDFs(customerEmail, orderDetails) {
-//   try {
-//     if (!customerEmail) {
-//       throw new Error("Customer email is required");
-//     }
+export async function sendSimpleEmailWithPDFs(customerEmail, orderDetails) {
+  try {
+    if (!customerEmail) {
+      throw new Error("Customer email is required");
+    }
 
-//     // Get PDF file IDs from environment variables
-//     const pdf1FileId = process.env.PDF1_FILE_ID;
-//     const pdf2FileId = process.env.PDF2_FILE_ID;
+    // Get PDF file IDs from environment variables
+    const pdf1FileId = process.env.PDF1_FILE_ID;
+    const pdf2FileId = process.env.PDF2_FILE_ID;
 
-//     if (!pdf1FileId || !pdf2FileId) {
-//       throw new Error("PDF file IDs are not configured");
-//     }
+    if (!pdf1FileId || !pdf2FileId) {
+      throw new Error("PDF file IDs are not configured");
+    }
 
-//     // Download PDFs from Google Drive in parallel
-//     const [pdf1Buffer, pdf2Buffer] = await Promise.all([
-//       downloadFileFromDrive(pdf1FileId),
-//       downloadFileFromDrive(pdf2FileId),
-//     ]);
+    // Download PDFs from Google Drive in parallel
+    const [pdf1Buffer, pdf2Buffer] = await Promise.all([
+      downloadFileFromDrive(pdf1FileId),
+      downloadFileFromDrive(pdf2FileId),
+    ]);
 
-//     // Simplified HTML email
-//     const simpleHtml = `
-//       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-//         <div style="background-color: #1976D2; color: white; padding: 20px; text-align: center;">
-//           <h1>Your SeaFreshh Recipe eBook</h1>
-//         </div>
-//         <div style="padding: 20px;">
-//           <p>Dear Seafood Lover,</p>
-//           <p>Thank you for purchasing the <strong>SeaFreshh Recipe eBook!</strong></p>
-//           <p>Your recipes are attached to this email in both English and Gujarati.</p>
-//           <p>Happy cooking!<br>The SeaFreshh Team</p>
-//         </div>
-//       </div>
-//     `;
+    // Simplified HTML email
+    const simpleHtml = `
+      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="background-color: #1976D2; color: white; padding: 20px; text-align: center;">
+          <h1>Your SeaFreshh Recipe eBook</h1>
+        </div>
+        <div style="padding: 20px;">
+          <p>Dear Seafood Lover,</p>
+          <p>Thank you for purchasing the <strong>SeaFreshh Recipe eBook!</strong></p>
+          <p>Your recipes are attached to this email in both English and Gujarati.</p>
+          <p>Happy cooking!<br>The SeaFreshh Team</p>
+        </div>
+      </div>
+    `;
 
-//     const { data, error } = await resend.emails.send({
-//       from: "Seafreshh <noreply@book.seafreshh.in>",
-//       to: customerEmail,
-//       subject: "Your SeaFreshh Recipe eBook is Here! 🦐",
-//       html: simpleHtml,
-//       attachments: [
-//         {
-//           filename: "SeaFreshh-Recipes-Gujarati.pdf",
-//           content: pdf1Buffer,
-//         },
-//         {
-//           filename: "SeaFreshh-Recipes-English.pdf",
-//           content: pdf2Buffer,
-//         },
-//       ],
-//     });
+    const { data, error } = await resend.emails.send({
+      from: "Seafreshh <noreply@book.seafreshh.in>",
+      to: customerEmail,
+      subject: "Your SeaFreshh Recipe eBook is Here! 🦐",
+      html: simpleHtml,
+      attachments: [
+        {
+          filename: "SeaFreshh-Recipes-Gujarati.pdf",
+          content: pdf1Buffer,
+        },
+        {
+          filename: "SeaFreshh-Recipes-English.pdf",
+          content: pdf2Buffer,
+        },
+      ],
+    });
 
-//     if (error) {
-//       console.error("Resend API error:", error);
-//       throw new Error(
-//         `Email sending failed: ${error.message || "Unknown error"}`
-//       );
-//     }
+    if (error) {
+      console.error("Resend API error:", error);
+      throw new Error(
+        `Email sending failed: ${error.message || "Unknown error"}`
+      );
+    }
 
-//     return { success: true, data };
-//   } catch (error) {
-//     console.error(`Failed to send email to ${customerEmail}:`, error);
-//     throw error;
-//   }
-// }
+    return { success: true, data };
+  } catch (error) {
+    console.error(`Failed to send email to ${customerEmail}:`, error);
+    throw error;
+  }
+}
