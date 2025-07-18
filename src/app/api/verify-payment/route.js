@@ -43,7 +43,7 @@ export async function POST(request) {
 
     // Start the email sending process but don't await it here
     // This allows us to respond to the client immediately
-    // ✅ Await before sending response
+    // Await before sending response
     await sendEmailWithPDFs(email, {
       orderId: razorpay_payment_id,
       name,
