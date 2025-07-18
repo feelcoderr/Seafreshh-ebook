@@ -10,8 +10,8 @@ export async function POST(request) {
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: process.env.NEXT_PUBLIC_SMTP_USER,
-      pass: process.env.NEXT_PUBLIC_SMTP_PASS,
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
     },
   });
   try {
