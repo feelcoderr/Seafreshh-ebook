@@ -33,7 +33,7 @@ export const handleFormSubmit = async (formData) => {
       },
       body: JSON.stringify(formData),
     }).then((res) => res.json());
-
+    console.log("1 orderData", orderData);
     if (!orderData.orderId) {
       throw new Error("Failed to create order");
     }
@@ -52,6 +52,9 @@ export const handleFormSubmit = async (formData) => {
         email: formData.email,
         contact: formData.phone,
       },
+      method: {
+        upi: true, // ✅ explicitly request UPI,only in test ,remove from production
+      },
       notes: {
         email: formData.email, // Store email in notes for reference
         address: formData.address,
@@ -66,7 +69,7 @@ export const handleFormSubmit = async (formData) => {
           // You could implement a loading state in your UI here
 
           // Verify payment on your server
-          const verifyData = await fetch("/api/verify-payment", {
+          /*const verifyData = await fetch("/api/verify-payment", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -91,8 +94,20 @@ export const handleFormSubmit = async (formData) => {
             window.location.href = `/thank-you`;
           } else {
             alert("Payment verification failed. Please contact support.");
-          }
+          }*/
+          console.log("2 response", response);
+
+          // Save payment info in localStorage
+          localStorage.setItem(
+            "seafreshh_order_id",
+            response.razorpay_payment_id
+          );
+          localStorage.setItem("seafreshh_email", formData.email);
+
+          // Redirect immediately (webhook handles verification + delivery)
+          window.location.href = `/thank-you`;
         } catch (error) {
+          console.log("3 error", error);
           console.error("Verification error:", error);
           alert(
             "Payment was successful, but we encountered an issue. Your recipe books will still be delivered to your email. If you don't receive them within 30 minutes, please contact us."
