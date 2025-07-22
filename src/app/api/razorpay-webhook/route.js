@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import crypto from "crypto";
 import { sendEmailWithPDFs } from "../../../lib/emailService.js";
+const processedPayments = new Set(); // to track payment id, that don't repeat sending mails
 
 // Helper to get raw body
 async function getRawBody(req) {
@@ -10,6 +11,34 @@ async function getRawBody(req) {
     chunks.push(chunk);
   }
   return Buffer.concat(chunks).toString("utf8");
+}
+// Extracted processor for async work
+async function processWebhookEvent(event) {
+  try {
+    if (event.event === "payment.captured") {
+      const payment =
+        event.payload.payment.entity || event?.payload?.order?.entity;
+      const paymentId = payment?.id;
+      //if payment is already processed
+      if (processedPayments.has(paymentId)) {
+        console.log(`Skipping duplicate webhook for: ${paymentId}`);
+        return;
+      }
+      processedPayments.add(paymentId); // Mark as seen
+      console.log("Processing payment:", paymentId);
+
+      const { email, name } = payment?.notes || {};
+      let customerEmail = payment?.notes?.email || payment?.email || "";
+
+      // Send email asynchronously
+      await sendEmailWithPDFs(customerEmail, {
+        orderId: paymentId || null,
+        name,
+      });
+    }
+  } catch (error) {
+    console.error("Async processing error:", error);
+  }
 }
 
 export async function POST(req) {
@@ -27,42 +56,25 @@ export async function POST(req) {
     const isAuthentic = signature === expectedSignature;
 
     if (!isAuthentic) {
-      console.error("❌ Invalid Razorpay webhook signature.");
+      console.error("Invalid Razorpay webhook signature.");
       return NextResponse.json({ status: "unauthorized" }, { status: 401 });
     }
 
     const event = JSON.parse(rawBody);
-    console.log("event", event);
-    console.log("event?.payload?.order", event?.payload?.order);
+    console.log(
+      "🔔 Incoming Event:",
+      event.event,
+      "Payment ID:",
+      event?.payload?.payment?.entity?.id
+    );
 
-    if (event.event === "payment.captured") {
-      const payment =
-        event.payload.payment.entity || event?.payload?.order?.entity;
-      const paymentId = payment?.id;
-
-      console.log("✅ Payment Captured:", payment);
-
-      const { email, name } = payment?.notes || {};
-      let customerEmail;
-      // Check payment notes for email
-      if (payment?.notes && payment?.notes.email) {
-        customerEmail = payment.notes.email;
-      } else if (payment.email) {
-        customerEmail = payment.email;
-      }
-
-      //send email
-      await sendEmailWithPDFs(email, {
-        orderId: paymentId || null,
-        name,
-      });
-    }
-    // Return success immediately without waiting for email to complete
-    return NextResponse.json({
-      success: true,
-      message:
-        "Payment verified successfully. Your recipe ebooks will be sent to your email shortly.",
-    });
+    // Respond immediately
+    const response = NextResponse.json({ status: "ok" });
+    //  Async processing
+    (async () => {
+      await processWebhookEvent(event);
+    })();
+    return response;
   } catch (error) {
     console.error("Webhook processing error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
