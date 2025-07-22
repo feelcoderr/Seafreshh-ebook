@@ -72,6 +72,9 @@ export default function PaymentForm() {
         prefill: {
           email: email,
         },
+        method: {
+          upi: true, // ✅ explicitly request UPI, remove from production
+        },
         theme: {
           color: "#1976D2",
         },
