@@ -21,22 +21,23 @@ const transporter = nodemailer.createTransport({
  * Sends an email with attached PDFs
  */
 export async function sendEmailWithPDFs(
-  { customerEmail, orderId, name },
+  { email, orderId, name },
   retryCount = 0
 ) {
   try {
-    console.log(
-      "Entered in email service to send mail:",
-      process.env.PDF1_FILE_ID
-    );
+    console.log("Entered in email service to send mail:", email, orderId, name);
     const pdfBuffer1 = await downloadFileFromDrive(process.env.PDF1_FILE_ID);
     const pdfBuffer2 = await downloadFileFromDrive(process.env.PDF2_FILE_ID);
 
-    if (!customerEmail || !orderId) {
-      throw new Error("Missing customer email or order ID");
+    if (!email || !orderId) {
+      throw new Error(
+        `Missing required fields: ${!email ? "email " : ""}${
+          !orderId ? "orderId" : ""
+        }`
+      );
     }
 
-    console.log(`Attempt ${retryCount + 1} sending to: ${customerEmail}`);
+    console.log(`Attempt ${retryCount + 1} sending to: ${email}`);
 
     // const { PDF1_FILE_ID, PDF2_FILE_ID } = process.env;
 
@@ -124,11 +125,11 @@ export async function sendEmailWithPDFs(
         </html>
       `;
 
-    console.log(`Sending email to ${customerEmail}`);
+    console.log(`Sending email to ${email}`);
 
     const emailInfo = await transporter.sendMail({
       from: "Seafreshh <noreply@book.seafreshh.in>",
-      to: customerEmail,
+      to: email,
       subject: "Your SeaFreshh Recipe eBook is Here! 🦐",
       text: "Thank you for purchasing our SeaFreshh Recipe eBook!",
       html,
@@ -146,7 +147,7 @@ export async function sendEmailWithPDFs(
       ],
     });
 
-    console.log(`[Email] Sent successfully to ${customerEmail}`);
+    console.log(`[Email] Sent successfully to ${email}`);
     return { success: true, info: emailInfo };
   } catch (error) {
     console.log("error at emailservice catch ", error);
@@ -155,11 +156,8 @@ export async function sendEmailWithPDFs(
     if (retryCount < MAX_RETRIES) {
       console.log(`[Email] Retrying in ${RETRY_DELAY}ms...`);
       await new Promise((res) => setTimeout(res, RETRY_DELAY));
-      // return sendEmailWithPDFs(customerEmail, orderId, retryCount + 1);
-      return sendEmailWithPDFs(
-        { customerEmail, orderId, name },
-        retryCount + 1
-      );
+      // return sendEmailWithPDFs(email, orderId, retryCount + 1);
+      return sendEmailWithPDFs({ email, orderId, name }, retryCount + 1);
     }
 
     throw new Error(
