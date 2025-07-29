@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import crypto from "crypto";
 import { sendEmailWithPDFs } from "../../../lib/emailService.js";
 const processedPayments = new Set(); // to track payment id, that don't repeat sending mails
+import { qstash } from "../../../lib/qstash.js";
 
 // Helper to get raw body
 async function getRawBody(req) {
@@ -68,14 +69,19 @@ export async function POST(req) {
       "Payment ID:",
       event?.payload?.payment?.entity?.id
     );
-
-    // Respond immediately
+    // Send to QStash for async processing
+    await qstash.publishJSON({
+      url: `${process.env.BASE_URL}/api/email-worker`, // e.g. https://your-vercel-domain/api/email-worker
+      body: event,
+    });
+    return NextResponse.json({ status: "ok" });
+    /*// Respond immediately
     const response = NextResponse.json({ status: "ok" });
     //  Async processing
     (async () => {
       await processWebhookEvent(event);
     })();
-    return response;
+    return response;*/
   } catch (error) {
     console.error("Webhook processing error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
