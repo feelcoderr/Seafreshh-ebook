@@ -31,6 +31,7 @@ export async function getGoogleDriveAuth() {
 // Download a file from Google Drive as a Buffer
 export async function downloadFileFromDrive(fileId) {
   try {
+    console.log("Enter in google drive");
     if (!fileId) {
       throw new Error("File ID is required");
     }

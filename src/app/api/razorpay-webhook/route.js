@@ -85,6 +85,7 @@ export async function POST(req) {
 
       const { email, name } = payment?.notes || {};
       let customerEmail = payment?.notes?.email || payment?.email || "";
+      console.log("starting qstash call");
       await qstash.publishJSON({
         url: `${process.env.BASE_URL}/api/email-worker`,
         body: { email: customerEmail, orderId: paymentId || null, name },
