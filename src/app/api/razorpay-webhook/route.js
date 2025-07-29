@@ -44,7 +44,8 @@ async function processWebhookEvent(event) {
 export async function POST(req) {
   const webhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET;
   try {
-    const rawBody = await getRawBody(req);
+    // const rawBody = await getRawBody(req);
+    const rawBody = await req.text(); //  FIX: get raw text safely
     //   const signature = req.headers["x-razorpay-signature"];
     const signature = req.headers.get("x-razorpay-signature");
 
