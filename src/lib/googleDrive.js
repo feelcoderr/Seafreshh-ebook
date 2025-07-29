@@ -45,8 +45,16 @@ export async function downloadFileFromDrive(fileId) {
         fileId,
         alt: "media",
       },
-      { responseType: "arraybuffer" }
+      {
+        responseType: "arraybuffer",
+        timeout: 10000, // 10 seconds
+      }
     );
+    if (!response || !response.data) {
+      throw new Error(
+        `Drive response is empty or undefined for file ${fileId}`
+      );
+    }
 
     console.log(
       `Successfully downloaded file ${fileId} (${response.data.length} bytes)`
