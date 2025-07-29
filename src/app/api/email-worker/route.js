@@ -8,7 +8,7 @@ export async function POST(req) {
   const { email, orderId, name } = await req.json();
 
   try {
-    console.log("this is email worker");
+    console.log("this is email worker", email, orderId, name);
     const { PDF1_FILE_ID, PDF2_FILE_ID } = process.env;
 
     if (!PDF1_FILE_ID || !PDF2_FILE_ID) {
