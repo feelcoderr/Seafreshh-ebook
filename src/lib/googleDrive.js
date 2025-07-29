@@ -28,8 +28,10 @@ export async function getGoogleDriveAuth() {
     throw new Error("Failed to initialize Google Drive authentication");
   }
 }
+// Download a file from Google Drive as a Buffer
 export async function downloadFileFromDrive(fileId) {
   try {
+    console.log("Enter in google drive");
     if (!fileId) {
       throw new Error("File ID is required");
     }
@@ -42,21 +44,12 @@ export async function downloadFileFromDrive(fileId) {
     } catch (err) {
       console.error("Error getting auth client", err);
     }
+
     const drive = google.drive({ version: "v3", auth: authClient });
 
     console.log(`Downloading file ${fileId} from Google Drive`);
-    const response = await drive.files.get(
-      { fileId, alt: "media" },
-      { responseType: "stream" }
-    );
 
-    const chunks = [];
-    return await new Promise((resolve, reject) => {
-      response.data.on("data", (chunk) => chunks.push(chunk));
-      response.data.on("end", () => resolve(Buffer.concat(chunks)));
-      response.data.on("error", reject);
-    });
-    /* let response;
+    let response;
     try {
       response = await drive.files.get(
         {
@@ -81,7 +74,7 @@ export async function downloadFileFromDrive(fileId) {
     console.log(
       `Successfully downloaded file ${fileId} (${response.data.length} bytes)`
     );
-    return Buffer.from(response.data);*/
+    return Buffer.from(response.data);
   } catch (error) {
     console.error(
       `Error downloading from Google Drive (file ${fileId}):`,

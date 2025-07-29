@@ -22,36 +22,39 @@ const transporter = nodemailer.createTransport({
  */
 export async function sendEmailWithPDFs(
   customerEmail,
-  orderDetails,
+  orderId,
+  name,
   retryCount = 0
 ) {
   try {
-    console.log("SMTP_USER:", process.env.SMTP_USER);
-    console.log("PDF1_FILE_ID:", process.env.PDF1_FILE_ID);
+    console.log(
+      "Entered in email service to send mail:",
+      process.env.PDF1_FILE_ID
+    );
+    const pdfBuffer1 = await downloadFileFromDrive(process.env.PDF1_FILE_ID);
+    const pdfBuffer2 = await downloadFileFromDrive(process.env.PDF2_FILE_ID);
 
-    if (!customerEmail || !orderDetails?.orderId) {
+    if (!customerEmail || !orderId) {
       throw new Error("Missing customer email or order ID");
     }
 
-    console.log(
-      `[Email] Attempt ${retryCount + 1} sending to: ${customerEmail}`
-    );
+    console.log(`Attempt ${retryCount + 1} sending to: ${customerEmail}`);
 
-    const { PDF1_FILE_ID, PDF2_FILE_ID } = process.env;
+    // const { PDF1_FILE_ID, PDF2_FILE_ID } = process.env;
 
-    if (!PDF1_FILE_ID || !PDF2_FILE_ID) {
-      throw new Error("Missing PDF file IDs in env");
-    }
-    let pdf1Buffer, pdf2Buffer;
-    // Download PDFs in parallel
-    try {
-      [pdf1Buffer, pdf2Buffer] = await Promise.all([
-        downloadFileFromDrive(PDF1_FILE_ID),
-        downloadFileFromDrive(PDF2_FILE_ID),
-      ]);
-    } catch (error) {
-      console.log("error after downloading pdf promise ", error);
-    }
+    // if (!PDF1_FILE_ID || !PDF2_FILE_ID) {
+    //   throw new Error("Missing PDF file IDs in env");
+    // }
+    // let pdf1Buffer, pdf2Buffer;
+    // // Download PDFs in parallel
+    // try {
+    //   [pdf1Buffer, pdf2Buffer] = await Promise.all([
+    //     downloadFileFromDrive(PDF1_FILE_ID),
+    //     downloadFileFromDrive(PDF2_FILE_ID),
+    //   ]);
+    // } catch (error) {
+    //   console.log("error after downloading pdf promise ", error);
+    // }
     console.log("✅ Both PDF files downloaded");
     const dateString = new Date().toLocaleDateString("en-US", {
       year: "numeric",
@@ -112,7 +115,7 @@ export async function sendEmailWithPDFs(
                     <td style="background-color: #f5f5f5; padding: 20px 40px; border-top: 1px solid #eeeeee;">
                       <p style="font-size: 14px; color: #666; margin: 0; text-align: center;">© 2025 SeaFreshh - Bringing the ocean's best to your kitchen</p>
                       <p style="font-size: 14px; color: #666; margin: 10px 0 0; text-align: center;">Order received on ${dateString}</p>
-                      <p style="font-size: 14px; color: #666; margin: 10px 0 0; text-align: center;">Order ID: ${orderDetails.orderId}</p>
+                      <p style="font-size: 14px; color: #666; margin: 10px 0 0; text-align: center;">Order ID: ${orderId}</p>
                     </td>
                   </tr>
                 </table>
@@ -134,12 +137,12 @@ export async function sendEmailWithPDFs(
       attachments: [
         {
           filename: "SeaFreshh-Recipes-Gujarati.pdf",
-          content: pdf1Buffer,
+          content: pdfBuffer1,
           contentType: "application/pdf",
         },
         {
           filename: "SeaFreshh-Recipes-English.pdf",
-          content: pdf2Buffer,
+          content: pdfBuffer2,
           contentType: "application/pdf",
         },
       ],
@@ -154,7 +157,7 @@ export async function sendEmailWithPDFs(
     if (retryCount < MAX_RETRIES) {
       console.log(`[Email] Retrying in ${RETRY_DELAY}ms...`);
       await new Promise((res) => setTimeout(res, RETRY_DELAY));
-      return sendEmailWithPDFs(customerEmail, orderDetails, retryCount + 1);
+      return sendEmailWithPDFs(customerEmail, orderId, retryCount + 1);
     }
 
     throw new Error(

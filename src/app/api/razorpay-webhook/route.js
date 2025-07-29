@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import crypto from "crypto";
 import { sendEmailWithPDFs } from "../../../lib/emailService.js";
 const processedPayments = new Set(); // to track payment id, that don't repeat sending mails
+import { qstash } from "../../../lib/qstash.js";
 
 // Helper to get raw body
 async function getRawBody(req) {
@@ -69,13 +70,35 @@ export async function POST(req) {
       event?.payload?.payment?.entity?.id
     );
 
-    // Respond immediately
+    // Send to QStash for async processing
+    if (event.event === "payment.captured") {
+      const payment =
+        event.payload.payment.entity || event?.payload?.order?.entity;
+      const paymentId = payment?.id;
+      //if payment is already processed
+      if (processedPayments.has(paymentId)) {
+        console.log(`Skipping duplicate webhook for: ${paymentId}`);
+        return;
+      }
+      processedPayments.add(paymentId); // Mark as seen
+      console.log("Processing payment:", paymentId);
+
+      const { email, name } = payment?.notes || {};
+      let customerEmail = payment?.notes?.email || payment?.email || "";
+      console.log("starting qstash call");
+      await qstash.publishJSON({
+        url: `${process.env.BASE_URL}/api/email-worker`,
+        body: { email: customerEmail, orderId: paymentId || null, name },
+      });
+    }
+    return NextResponse.json({ status: "ok" });
+    /*// Respond immediately
     const response = NextResponse.json({ status: "ok" });
     //  Async processing
     (async () => {
       await processWebhookEvent(event);
     })();
-    return response;
+    return response;*/
   } catch (error) {
     console.error("Webhook processing error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
