@@ -21,9 +21,7 @@ const transporter = nodemailer.createTransport({
  * Sends an email with attached PDFs
  */
 export async function sendEmailWithPDFs(
-  customerEmail,
-  orderId,
-  name,
+  { customerEmail, orderId, name },
   retryCount = 0
 ) {
   try {
@@ -157,7 +155,11 @@ export async function sendEmailWithPDFs(
     if (retryCount < MAX_RETRIES) {
       console.log(`[Email] Retrying in ${RETRY_DELAY}ms...`);
       await new Promise((res) => setTimeout(res, RETRY_DELAY));
-      return sendEmailWithPDFs(customerEmail, orderId, retryCount + 1);
+      // return sendEmailWithPDFs(customerEmail, orderId, retryCount + 1);
+      return sendEmailWithPDFs(
+        { customerEmail, orderId, name },
+        retryCount + 1
+      );
     }
 
     throw new Error(
