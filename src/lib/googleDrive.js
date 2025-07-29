@@ -35,21 +35,43 @@ export async function downloadFileFromDrive(fileId) {
     }
 
     const auth = await getGoogleDriveAuth();
-    const authClient = await auth.getClient(); //  IMPORTANT
+    let authClient;
+    try {
+      authClient = await auth.getClient();
+      console.log("Got auth client");
+    } catch (err) {
+      console.error("Error getting auth client", err);
+    }
     const drive = google.drive({ version: "v3", auth: authClient });
 
     console.log(`Downloading file ${fileId} from Google Drive`);
-
     const response = await drive.files.get(
-      {
-        fileId,
-        alt: "media",
-      },
-      {
-        responseType: "arraybuffer",
-        timeout: 10000, // 10 seconds
-      }
+      { fileId, alt: "media" },
+      { responseType: "stream" }
     );
+
+    const chunks = [];
+    return await new Promise((resolve, reject) => {
+      response.data.on("data", (chunk) => chunks.push(chunk));
+      response.data.on("end", () => resolve(Buffer.concat(chunks)));
+      response.data.on("error", reject);
+    });
+    /* let response;
+    try {
+      response = await drive.files.get(
+        {
+          fileId,
+          alt: "media",
+        },
+        {
+          responseType: "arraybuffer",
+          timeout: 10000, // 10 seconds
+        }
+      );
+    } catch (error) {
+      console.error("Drive API error:", err);
+    }
+
     if (!response || !response.data) {
       throw new Error(
         `Drive response is empty or undefined for file ${fileId}`
@@ -59,7 +81,7 @@ export async function downloadFileFromDrive(fileId) {
     console.log(
       `Successfully downloaded file ${fileId} (${response.data.length} bytes)`
     );
-    return Buffer.from(response.data);
+    return Buffer.from(response.data);*/
   } catch (error) {
     console.error(
       `Error downloading from Google Drive (file ${fileId}):`,

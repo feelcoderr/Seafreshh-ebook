@@ -135,10 +135,12 @@ export async function sendEmailWithPDFs(
         {
           filename: "SeaFreshh-Recipes-Gujarati.pdf",
           content: pdf1Buffer,
+          contentType: "application/pdf",
         },
         {
           filename: "SeaFreshh-Recipes-English.pdf",
           content: pdf2Buffer,
+          contentType: "application/pdf",
         },
       ],
     });
