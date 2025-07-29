@@ -44,11 +44,15 @@ export async function sendEmailWithPDFs(
     }
     let pdf1Buffer, pdf2Buffer;
     // Download PDFs in parallel
-    [pdf1Buffer, pdf2Buffer] = await Promise.all([
-      downloadFileFromDrive(PDF1_FILE_ID),
-      downloadFileFromDrive(PDF2_FILE_ID),
-    ]);
-
+    try {
+      [pdf1Buffer, pdf2Buffer] = await Promise.all([
+        downloadFileFromDrive(PDF1_FILE_ID),
+        downloadFileFromDrive(PDF2_FILE_ID),
+      ]);
+    } catch (error) {
+      console.log("error after downloading pdf promise ", error);
+    }
+    console.log("✅ Both PDF files downloaded");
     const dateString = new Date().toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
@@ -131,10 +135,12 @@ export async function sendEmailWithPDFs(
         {
           filename: "SeaFreshh-Recipes-Gujarati.pdf",
           content: pdf1Buffer,
+          contentType: "application/pdf",
         },
         {
           filename: "SeaFreshh-Recipes-English.pdf",
           content: pdf2Buffer,
+          contentType: "application/pdf",
         },
       ],
     });
@@ -142,6 +148,7 @@ export async function sendEmailWithPDFs(
     console.log(`[Email] Sent successfully to ${customerEmail}`);
     return { success: true, info: emailInfo };
   } catch (error) {
+    console.log("error at emailservice catch ", error);
     console.error(`[Email] Error (attempt ${retryCount + 1}):`, error.message);
 
     if (retryCount < MAX_RETRIES) {
