@@ -69,11 +69,27 @@ export async function POST(req) {
       "Payment ID:",
       event?.payload?.payment?.entity?.id
     );
+
     // Send to QStash for async processing
-    await qstash.publishJSON({
-      url: `${process.env.BASE_URL}/api/email-worker`, // e.g. https://your-vercel-domain/api/email-worker
-      body: event,
-    });
+    if (event.event === "payment.captured") {
+      const payment =
+        event.payload.payment.entity || event?.payload?.order?.entity;
+      const paymentId = payment?.id;
+      //if payment is already processed
+      if (processedPayments.has(paymentId)) {
+        console.log(`Skipping duplicate webhook for: ${paymentId}`);
+        return;
+      }
+      processedPayments.add(paymentId); // Mark as seen
+      console.log("Processing payment:", paymentId);
+
+      const { email, name } = payment?.notes || {};
+      let customerEmail = payment?.notes?.email || payment?.email || "";
+      await qstash.publishJSON({
+        url: `${process.env.BASE_URL}/api/email-worker`,
+        body: { email: customerEmail, orderId: paymentId || null, name },
+      });
+    }
     return NextResponse.json({ status: "ok" });
     /*// Respond immediately
     const response = NextResponse.json({ status: "ok" });

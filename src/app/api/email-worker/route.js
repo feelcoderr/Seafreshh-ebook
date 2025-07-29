@@ -1,31 +1,31 @@
 import { NextResponse } from "next/server";
 import { sendEmailWithPDFs } from "../../../lib/emailService.js";
+import { downloadFileFromDrive } from "../../../lib/googleDrive.js";
 
 const processedPayments = new Set();
 
 export async function POST(req) {
-  const event = await req.json();
+  const { email, orderId, name } = await req.json();
 
   try {
-    if (event.event === "payment.captured") {
-      const payment = event.payload?.payment?.entity;
-      const paymentId = payment?.id;
-      if (processedPayments.has(paymentId))
-        return NextResponse.json({ status: "skipped" });
+    const { PDF1_FILE_ID, PDF2_FILE_ID } = process.env;
 
-      processedPayments.add(paymentId);
-
-      const { name, email } = payment?.notes || {};
-      const customerEmail = email || payment?.email || "";
-
-      await sendEmailWithPDFs(customerEmail, {
-        orderId: paymentId || null,
-        name,
-      });
-
-      return NextResponse.json({ status: "done" });
+    if (!PDF1_FILE_ID || !PDF2_FILE_ID) {
+      throw new Error("Missing PDF file IDs in env");
     }
-    return NextResponse.json({ status: "ignored" });
+    let pdf1Buffer, pdf2Buffer;
+    // Download PDFs in parallel
+    try {
+      [pdf1Buffer, pdf2Buffer] = await Promise.all([
+        downloadFileFromDrive(PDF1_FILE_ID),
+        downloadFileFromDrive(PDF2_FILE_ID),
+      ]);
+    } catch (error) {
+      console.log("error after downloading pdf promise ", error);
+    }
+    await sendEmailWithPDFs({ email, orderId: orderId || null, name });
+
+    return NextResponse.json({ status: "done" });
   } catch (err) {
     console.error("email-worker error:", err);
     return NextResponse.json({ error: err.message }, { status: 500 });
